@@ -2,7 +2,6 @@
 #include <internal/game_field.h>
 #include <memory.h>
 
-gn_ph_settings_t settings;
 gn_solid_body_t *bodies[SOLID_BODIES_BUFFER_CAPACITY];
 gn_bird_t *birds[BIRDS_BUFFER_CAPACITY];
 
