@@ -13,5 +13,6 @@
 typedef void (*void_callback)(void);
 
 void timer_service_call_periodically(void_callback clb, fb_uint8_t ticks);
+void timer_service_delete(void_callback clb);
 
 #endif //FLAPPYBIRD_TIMER_SERVICE_H
