@@ -24,6 +24,10 @@ typedef struct gl_rectangle_s {
     fb_uint16_t width;
     fb_uint16_t height;
 
+    fb_uint8_t border_size;
+
+    gl_color_t color;
+
 } gl_rectangle_t;
 
 typedef struct gl_circle_s {
@@ -31,6 +35,10 @@ typedef struct gl_circle_s {
     gl_point_t point;
 
     fb_uint16_t radius;
+
+    fb_uint8_t border_size;
+
+    gl_color_t color;
 
 } gl_circle_t;
 
