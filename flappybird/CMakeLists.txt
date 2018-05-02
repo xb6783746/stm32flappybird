@@ -1,7 +1,10 @@
 
 
 add_library(gamelogic STATIC
-        )
+        src/flappybird.c
+        src/object_buffer.c
+        src/game_object_factory.c
+        src/engine_event_handler.c)
 
 target_include_directories(
         gamelogic PUBLIC
