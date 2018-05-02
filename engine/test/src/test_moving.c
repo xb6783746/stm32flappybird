@@ -22,6 +22,8 @@
 #define Y_POS_DELTA(v) ((v) * PHYSICS_TIME_STEP)
 #define X_POS_DELTA HORIZONTAL_VELOCITY * PHYSICS_TIME_STEP
 
+gn_ph_settings_t settings;
+
 static gn_game_object go[2];
 
 static gn_bird_t bird;
@@ -47,9 +49,9 @@ void test_move_body(){
     TEST_ASSERT_EQUAL_FLOAT(body.go->point.x - 50, X_POS_DELTA);
     TEST_ASSERT_EQUAL_FLOAT(body.go->point.y - 50, 0);
 
-    TEST_ASSERT_EQUAL_FLOAT(bird.vertical_velocity - VERTICAL_VELOCITY, VERT_VEL_DELTA);
+    TEST_ASSERT_EQUAL_FLOAT(birds[0].vertical_velocity - VERTICAL_VELOCITY, VERT_VEL_DELTA);
     TEST_ASSERT_EQUAL_FLOAT(bird.go->point.x - 10, 0);
-    TEST_ASSERT_EQUAL_FLOAT(bird.go->point.y - 10, Y_POS_DELTA(bird.vertical_velocity));
+    TEST_ASSERT_EQUAL_FLOAT(bird.go->point.y - 10, Y_POS_DELTA(birds[0].vertical_velocity));
 
     TEST_ASSERT_EQUAL(on_deleted_called, 0);
 }

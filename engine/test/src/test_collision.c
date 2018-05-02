@@ -10,6 +10,8 @@
 #define BIRD_SIZE 5
 #define BODY_SIZE 10
 
+gn_ph_settings_t settings;
+
 static gn_game_object go[2];
 
 static gn_bird_t bird;
