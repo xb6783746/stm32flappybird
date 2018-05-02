@@ -4,6 +4,6 @@
 
 #include <platform.h>
 
-fb_uint32_r random(void);
+fb_uint32_t fb_random(void);
 
 #endif //FLAPPYBIRD_RANDOM_SERVICE_H
