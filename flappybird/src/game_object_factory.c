@@ -14,7 +14,7 @@ static void create(void);
 
 void flappybird_go_factory_start(void){
 
-    timer_service_call_periodically(create, (fb_uint8_t) PERIOD_TICKS);
+    timer_service_call_periodically(create, (fb_uint32_t) PERIOD_TICKS);
 }
 
 void flappybird_go_factory_stop(void){
@@ -33,7 +33,7 @@ static void create(void){
     body.width = PIPE_HOLE_SIZE;
     body.height = (fb_uint16_t) (flappybird_settings.screen_height / 3);
 
-    go->point.x = flappybird_settings.screen_width;
+    go->point.x = flappybird_settings.screen_width - PIPE_HOLE_SIZE;
     go->point.y = flappybird_settings.screen_height - body.height;
 
     physics_engine_add_solid_body(&body);
