@@ -30,6 +30,8 @@ void graphics_clear(gl_color_t color){
     cairo_paint(cr);
 
     cairo_destroy(cr);
+
+    gtk_widget_queue_draw_area(widget, 0, 0, 500, 100);
 }
 
 void graphics_draw_rect(gl_rectangle_t *obj){
