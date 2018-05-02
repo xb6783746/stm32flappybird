@@ -5,7 +5,7 @@
 
 static gl_color_t white;
 
-static gn_img_rectangle_t *image_arr[IMG_BUFFER_CAPACITY];
+static gn_img_rectangle_t image_arr[IMG_BUFFER_CAPACITY];
 
 static void draw_image(gn_img_rectangle_t *img);
 
@@ -18,7 +18,7 @@ void gn_graphics_init(void){
     int i;
     for(i = 0; i < IMG_BUFFER_CAPACITY; i++){
 
-        image_arr[i] = NULL;
+        image_arr[i].go = NULL;
     }
 }
 
@@ -29,9 +29,9 @@ void gn_graphics_next(void){
     int i;
     for(i = 0; i < IMG_BUFFER_CAPACITY; i++){
 
-        if(image_arr[i]!= NULL){
+        if(image_arr[i].go != NULL){
 
-            draw_image(image_arr[i]);
+            draw_image(&image_arr[i]);
         }
     }
 }
@@ -41,9 +41,9 @@ void graphics_engine_add_frect(gn_img_rectangle_t *img){
     int i;
     for(i = 0; i < IMG_BUFFER_CAPACITY; i++){
 
-        if(image_arr[i] == NULL){
+        if(image_arr[i].go == NULL){
 
-            image_arr[i] = img;
+            image_arr[i] = *img;
             break;
         }
     }
@@ -54,9 +54,9 @@ void graphics_engine_delete(gn_game_object *go){
     int i;
     for(i = 0; i < IMG_BUFFER_CAPACITY; i++){
 
-        if(image_arr[i] != NULL && image_arr[i]->go == go){
+        if(image_arr[i].go != NULL && image_arr[i].go == go){
 
-            image_arr[i] = NULL;
+            image_arr[i].go = NULL;
         }
     }
 }

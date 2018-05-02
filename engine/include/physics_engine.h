@@ -31,6 +31,7 @@ typedef struct gn_bird_s {
 
 void physics_engine_add_bird(gn_bird_t *obj);
 void physics_engine_set_birds_horizontal_velocity(gn_velocity vel);
+void physics_engine_add_bird_vertical_velocity(fb_uint8_t bird, gn_velocity vel);
 void physics_engine_set_gravity(fb_uint16_t gravity);
 void physics_engine_add_solid_body(gn_solid_body_t *obj);
 

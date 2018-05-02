@@ -28,6 +28,11 @@ void physics_engine_set_birds_horizontal_velocity(gn_velocity vel){
     gn_phys_set_step(vel);
 }
 
+void physics_engine_add_bird_vertical_velocity(fb_uint8_t bird, gn_velocity vel){
+
+    birds[bird].vertical_velocity += vel;
+}
+
 void physics_engine_set_gravity(uint16_t gravity){
 
     settings.gravity = gravity;

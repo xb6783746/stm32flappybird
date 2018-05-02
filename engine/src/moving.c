@@ -56,7 +56,7 @@ static void move_birds(void){
 
             if(birds[i].go->point.y + birds[i].height >= settings.screen_height){
 
-                birds[i].go->point.y = settings.screen_height;
+                birds[i].go->point.y = settings.screen_height - birds[i].height;
                 birds[i].vertical_velocity = 0;
             } else if(birds[i].go->point.y <= 0){
 

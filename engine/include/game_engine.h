@@ -3,6 +3,8 @@
 #ifndef FLAPPYBIRD_GAME_ENGINE_H
 #define FLAPPYBIRD_GAME_ENGINE_H
 
+#include <game_structs.h>
+
 typedef void (*collision_callback)(gn_game_object *go1, gn_game_object *go2);
 typedef void (*object_deleted_callback)(gn_game_object *go);
 
