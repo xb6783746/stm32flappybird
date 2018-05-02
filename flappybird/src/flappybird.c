@@ -1,5 +1,5 @@
 
-
+#include <platform.h>
 #include <flappybird.h>
 #include <game_engine.h>
 #include <internal/game_object_factory.h>
@@ -29,6 +29,7 @@ void flappybird_init(fb_game_settings_t *arg){
     engine_settings.bird_horizontal_velocity = BIRD_HORIZONTAL_VELOCITY;
     engine_settings.gravity = GRAVITY;
 
+    flappybird_object_buffer_init();
     game_engine_init(&engine_settings);
 
     init_field();

@@ -3,7 +3,6 @@
 #ifndef FLAPPYBIRD_FLAPPYBIRD_H
 #define FLAPPYBIRD_FLAPPYBIRD_H
 
-#include <plathorm.h>
 
 typedef void (*on_game_over_callback)(fb_uint8_t bird_num);
 

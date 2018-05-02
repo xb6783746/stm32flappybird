@@ -1,6 +1,5 @@
 
 
-#include <internal/>
 #include <physics_engine.h>
 #include <internal/game_objects.h>
 #include <flappybird.h>
