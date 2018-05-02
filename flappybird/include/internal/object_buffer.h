@@ -7,7 +7,7 @@
 #include <graphics_engine.h>
 
 
-#define GAME_OBJECT_BUFFER_CAPACITY 15
+#define GAME_OBJECT_BUFFER_CAPACITY 100
 
 void flappybird_object_buffer_init(void);
 
