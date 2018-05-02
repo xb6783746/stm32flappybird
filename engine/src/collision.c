@@ -12,9 +12,9 @@ void gn_phys_process_collision(){
     int i;
     for(i = 0; i < BIRDS_BUFFER_CAPACITY; i++){
 
-        if(birds[i] != NULL) {
+        if(birds[i].go != NULL) {
 
-            check_bird_collision(birds[i]);
+            check_bird_collision(&birds[i]);
         }
     }
 }
@@ -24,11 +24,11 @@ static fb_uint8_t check_bird_collision(gn_bird_t *bird){
     int i;
     for(i = 0; i < SOLID_BODIES_BUFFER_CAPACITY; i++){
 
-        if(bodies[i] != NULL) {
+        if(bodies[i].go != NULL) {
 
-            if(check_collision(bird, bodies[i])){
+            if(check_collision(bird, &bodies[i])){
 
-                settings.on_collision(bird->go, bodies[i]->go);
+                settings.on_collision(bird->go, bodies[i].go);
             }
         }
     }

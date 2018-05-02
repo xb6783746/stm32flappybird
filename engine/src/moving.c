@@ -31,15 +31,15 @@ static void move_bodies(void){
     int i;
     for(i = 0; i < SOLID_BODIES_BUFFER_CAPACITY; i++){
 
-        if(bodies[i] != NULL){
+        if(bodies[i].go != NULL){
 
-            bodies[i]->go->point.x += step;
+            bodies[i].go->point.x += step;
 
-            if(bodies[i]->go->point.x + bodies[i]->width < 0){
+            if(bodies[i].go->point.x + bodies[i].width < 0){
 
-                settings.on_object_deleted(bodies[i]->go);
+                settings.on_object_deleted(bodies[i].go);
 
-                bodies[i] = NULL;
+                bodies[i].go = NULL;
             }
         }
     }
@@ -49,19 +49,19 @@ static void move_birds(void){
     int i;
     for(i = 0; i < BIRDS_BUFFER_CAPACITY; i++){
 
-        if(birds[i] != NULL){
+        if(birds[i].go != NULL){
 
-            birds[i]->vertical_velocity += gravity;
-            birds[i]->go->point.y += birds[i]->vertical_velocity * PHYSICS_TIME_STEP;
+            birds[i].vertical_velocity += gravity;
+            birds[i].go->point.y += birds[i].vertical_velocity * PHYSICS_TIME_STEP;
 
-            if(birds[i]->go->point.y + birds[i]->height >= settings.screen_height){
+            if(birds[i].go->point.y + birds[i].height >= settings.screen_height){
 
-                birds[i]->go->point.y = settings.screen_height;
-                birds[i]->vertical_velocity = 0;
-            } else if(birds[i]->go->point.y <= 0){
+                birds[i].go->point.y = settings.screen_height;
+                birds[i].vertical_velocity = 0;
+            } else if(birds[i].go->point.y <= 0){
 
-                birds[i]->go->point.y = 0;
-                birds[i]->vertical_velocity = 0;
+                birds[i].go->point.y = 0;
+                birds[i].vertical_velocity = 0;
             }
         }
     }
