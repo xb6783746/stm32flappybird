@@ -5,12 +5,16 @@
 #include <flappybird_settings.h>
 #include <flappybird.h>
 #include <game_structs.h>
+#include <random_service.h>
 
 #define PERIOD_TICKS (CREATE_EVERY_S / TIMER_PERIOD_SEC)
 
 extern fb_game_settings_t flappybird_settings;
 
 static void create(void);
+
+static void add_pipe(fb_uint16_t hole_height, fb_uint8_t is_upper);
+static void add_image(gn_solid_body_t *body, gl_color_t color);
 
 void flappybird_go_factory_start(void){
 
@@ -25,27 +29,71 @@ void flappybird_go_factory_stop(void){
 //TODO randomize pipes
 static void create(void){
 
+    fb_uint16_t from = PIPE_HOLE_SIZE;
+    fb_uint16_t to = (fb_uint16_t) (flappybird_settings.screen_height - 2 * PIPE_HOLE_SIZE);
+
+    fb_uint16_t hole_height = (fb_uint16_t) fb_random_between(from, to); //(fb_uint16_t) fb_random();
+
+    add_pipe(hole_height, 0);
+    add_pipe(hole_height, 1);
+}
+
+static void add_pipe(fb_uint16_t hole_height, fb_uint8_t is_upper){
+
     gn_game_object *go = flappybird_object_buffer_get_game_object();
 
     gn_solid_body_t body;
 
     body.go = go;
-    body.width = PIPE_HOLE_SIZE;
-    body.height = (fb_uint16_t) (flappybird_settings.screen_height / 3);
+    body.width = PIPE_WIDTH;
+    body.height = is_upper?
+                      hole_height : (fb_uint16_t) (flappybird_settings.screen_height - hole_height - PIPE_HOLE_SIZE);
 
-    go->point.x = flappybird_settings.screen_width - PIPE_HOLE_SIZE;
-    go->point.y = flappybird_settings.screen_height - body.height;
+    go->point.x = flappybird_settings.screen_width - PIPE_WIDTH;
+    go->point.y = is_upper? 0 : hole_height + PIPE_HOLE_SIZE;
 
     physics_engine_add_solid_body(&body);
 
+    gl_color_t color;
+    color.red = color.green = color.blue = 0;
+
+    add_image(&body, color);
+}
+
+static void add_image(gn_solid_body_t *body, gl_color_t color){
+
+
     gn_img_rectangle_t rect;
 
-    rect.go = go;
-    rect.width = body.width;
-    rect.height = body.height;
-    rect.color.red = rect.color.green = rect.color.blue = 0;
+    rect.go = body->go;
+    rect.width = body->width;
+    rect.height = body->height;
+    rect.color = color;
 
     graphics_engine_add_frect(&rect);
 }
+
+//static void create_down(gn_solid_body_t *down_body, fb_uint16_t hole_height){
+//
+//    gn_game_object *go = flappybird_object_buffer_get_game_object();
+//
+//    down_body->go = go;
+//    down_body->width = PIPE_WIDTH;
+//    down_body->height = (fb_uint16_t) (flappybird_settings.screen_height - hole_height - PIPE_HOLE_SIZE);
+//
+//    go->point.x = flappybird_settings.screen_width - PIPE_WIDTH;
+//    go->point.y = hole_height + PIPE_HOLE_SIZE;
+//
+//    physics_engine_add_solid_body(down_body);
+//
+//    gn_img_rectangle_t rect;
+//
+//    rect.go = go;
+//    rect.width = down_body->width;
+//    rect.height = down_body->height;
+//    rect.color.red = rect.color.green = rect.color.blue = 0;
+//
+//    graphics_engine_add_frect(&rect);
+//}
 
 

@@ -15,8 +15,8 @@
 #define BIRD_INITIAL_Y 20
 #define DIST_BETWEEN_BIRDS BIRD_WIDTH*2
 
-#define PIPE_WIDTH 5
-#define PIPE_HOLE_SIZE 10
+#define PIPE_WIDTH 10
+#define PIPE_HOLE_SIZE 25
 
 #define GRAVITY 25
 
