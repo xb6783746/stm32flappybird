@@ -7,7 +7,6 @@
 #include <flappybird_settings.h>
 #include <physics_engine.h>
 #include <internal/object_buffer.h>
-#include <game_structs.h>
 #include <internal/game_objects.h>
 
 
@@ -30,20 +29,20 @@ void flappybird_init(fb_game_settings_t *arg){
     engine_settings.gravity = GRAVITY;
 
     flappybird_object_buffer_init();
-    game_engine_init(&engine_settings);
+    gn_engine_init(&engine_settings);
 
     init_field();
 }
 
 void flappybird_start(){
 
-    game_engine_start();
+    gn_engine_start();
 
     flappybird_go_factory_start();
 }
 void flappybird_stop(){
 
-    game_engine_stop();
+    gn_engine_stop();
 
     flappybird_go_factory_stop();
 }
@@ -76,8 +75,8 @@ static void init_field(){
         img.color.green = 255;
         img.color.red = img.color.blue = 0;
 
-        physics_engine_add_bird(&bird);
-        graphics_engine_add_frect(&img);
+        gn_phys_add_bird(&bird);
+        gn_graphics_add_frect(&img);
     }
 }
 

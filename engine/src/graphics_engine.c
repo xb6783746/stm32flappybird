@@ -1,7 +1,6 @@
 
 #include <graphics_engine.h>
 #include <graphics.h>
-#include <game_structs.h>
 
 static gl_color_t white;
 
@@ -36,7 +35,7 @@ void gn_graphics_next(void){
     }
 }
 
-void graphics_engine_add_frect(gn_img_rectangle_t *img){
+void gn_graphics_add_frect(gn_img_rectangle_t *img){
 
     int i;
     for(i = 0; i < IMG_BUFFER_CAPACITY; i++){
@@ -49,7 +48,7 @@ void graphics_engine_add_frect(gn_img_rectangle_t *img){
     }
 }
 
-void graphics_engine_delete(gn_game_object *go){
+void gn_graphics_delete(gn_game_object *go){
 
     int i;
     for(i = 0; i < IMG_BUFFER_CAPACITY; i++){

@@ -4,7 +4,6 @@
 #include <internal/object_buffer.h>
 #include <flappybird_settings.h>
 #include <flappybird.h>
-#include <game_structs.h>
 #include <random_service.h>
 
 #define PERIOD_TICKS (CREATE_EVERY_S / TIMER_PERIOD_SEC)
@@ -52,7 +51,7 @@ static void add_pipe(fb_uint16_t hole_height, fb_uint8_t is_upper){
     go->point.x = flappybird_settings.screen_width - PIPE_WIDTH;
     go->point.y = is_upper? 0 : hole_height + PIPE_HOLE_SIZE;
 
-    physics_engine_add_solid_body(&body);
+    gn_phys_add_solid_body(&body);
 
     gl_color_t color;
     color.red = color.green = color.blue = 0;
@@ -70,7 +69,7 @@ static void add_image(gn_solid_body_t *body, gl_color_t color){
     rect.height = body->height;
     rect.color = color;
 
-    graphics_engine_add_frect(&rect);
+    gn_graphics_add_frect(&rect);
 }
 
 //static void create_down(gn_solid_body_t *down_body, fb_uint16_t hole_height){
@@ -84,7 +83,7 @@ static void add_image(gn_solid_body_t *body, gl_color_t color){
 //    go->point.x = flappybird_settings.screen_width - PIPE_WIDTH;
 //    go->point.y = hole_height + PIPE_HOLE_SIZE;
 //
-//    physics_engine_add_solid_body(down_body);
+//    gn_phys_add_solid_body(down_body);
 //
 //    gn_img_rectangle_t rect;
 //
@@ -93,7 +92,7 @@ static void add_image(gn_solid_body_t *body, gl_color_t color){
 //    rect.height = down_body->height;
 //    rect.color.red = rect.color.green = rect.color.blue = 0;
 //
-//    graphics_engine_add_frect(&rect);
+//    gn_graphics_add_frect(&rect);
 //}
 
 

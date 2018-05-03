@@ -9,5 +9,5 @@ extern flappybird_bird_t flappybird_bird_t_arr[BIRDS_BUFFER_CAPACITY];
 
 void flappybird_tap(fb_uint8_t bird_num){
 
-    physics_engine_add_bird_vertical_velocity(bird_num, BIRD_JUMP);
+    gn_phys_set_bird_vertical_velocity(bird_num, BIRD_JUMP);
 }

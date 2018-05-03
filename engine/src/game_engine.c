@@ -9,26 +9,26 @@
 
 gn_ph_settings_t settings;
 
-void game_engine_init(gn_ph_settings_t *arg){
+void gn_engine_init(gn_ph_settings_t *arg){
 
     settings = *arg;
 
-    gn_physics_init();
+    gn_phys_init();
     gn_graphics_init();
 }
 
-void game_engine_start(void){
+void gn_engine_start(void){
 
-    timer_service_call_periodically(gn_physics_next, PHYSICS_CYCLE_TICKS);
+    timer_service_call_periodically(gn_phys_next, PHYSICS_CYCLE_TICKS);
     timer_service_call_periodically(gn_graphics_next, GRAPHICS_CYCLE_TICKS);
 }
-void game_engine_stop(void){
+void gn_engine_stop(void){
 
-    timer_service_delete(gn_physics_next);
+    timer_service_delete(gn_phys_next);
     timer_service_delete(gn_graphics_next);
 }
-void game_engine_restart(void){
+void gn_engine_restart(void){
 
-    gn_physics_init();
+    gn_phys_init();
     gn_graphics_init();
 }

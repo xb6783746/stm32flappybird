@@ -1,7 +1,6 @@
 
 #include <internal/moving.h>
 #include <internal/game_field.h>
-#include <game_structs.h>
 
 
 fb_float32_t step;
@@ -15,7 +14,7 @@ void gn_phys_set_step(fb_float32_t arg){
     step = arg * PHYSICS_TIME_STEP;
 }
 
-void gn_phys_set_gravity(fb_float32_t arg){
+void gn_phys_set_gravity_internal(fb_float32_t arg){
 
     gravity = arg * PHYSICS_TIME_STEP;
 }

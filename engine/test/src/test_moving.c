@@ -4,8 +4,6 @@
 #include <unity.h>
 #include <internal/moving.h>
 #include <internal/game_field.h>
-#include <memory.h>
-#include <game_structs.h>
 
 
 #define SCREEN_HEIGHT 100
@@ -105,7 +103,7 @@ static void init_field(){
     gn_phys_add_body_to_field(&body);
 
     gn_phys_set_step(HORIZONTAL_VELOCITY);
-    gn_phys_set_gravity(GRAVITY);
+    gn_phys_set_gravity_internal(GRAVITY);
 }
 
 int main(void)

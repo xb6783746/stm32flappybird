@@ -17,13 +17,13 @@ typedef struct gn_ph_settings_s {
     fb_uint16_t screen_width;
     fb_uint16_t screen_height;
 
-    fb_uint16_t gravity;
+    fb_float32_t gravity;
 } gn_ph_settings_t;
 
-void game_engine_init(gn_ph_settings_t *settings);
+void gn_engine_init(gn_ph_settings_t *settings);
 
-void game_engine_start(void);
-void game_engine_stop(void);
-void game_engine_restart(void);
+void gn_engine_start(void);
+void gn_engine_stop(void);
+void gn_engine_restart(void);
 
 #endif //FLAPPYBIRD_GAME_ENGINE_H

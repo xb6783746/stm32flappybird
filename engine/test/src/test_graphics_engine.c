@@ -3,7 +3,6 @@
 #include <internal/graphics_internal.h>
 #include <unity.h>
 #include <Mockgraphics.h>
-#include <game_structs.h>
 
 
 #define IMG_COUNT 3
@@ -24,8 +23,8 @@ void test_redraw(void){
 
     gn_graphics_init();
 
-    graphics_engine_add_frect(&imgs[0]);
-    graphics_engine_add_frect(&imgs[1]);
+    gn_graphics_add_frect(&imgs[0]);
+    gn_graphics_add_frect(&imgs[1]);
 
     graphics_clear_Expect(white);
 
@@ -41,11 +40,11 @@ void test_delete(void){
 
     gn_graphics_init();
 
-    graphics_engine_add_frect(&imgs[0]);
-    graphics_engine_add_frect(&imgs[1]);
-    graphics_engine_add_frect(&imgs[2]);
+    gn_graphics_add_frect(&imgs[0]);
+    gn_graphics_add_frect(&imgs[1]);
+    gn_graphics_add_frect(&imgs[2]);
 
-    graphics_engine_delete(imgs[1].go);
+    gn_graphics_delete(imgs[1].go);
 
     graphics_clear_Expect(white);
 

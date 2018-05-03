@@ -22,7 +22,7 @@ typedef struct gn_img_rectangle_s{
 } gn_img_rectangle_t;
 
 
-void graphics_engine_add_frect(gn_img_rectangle_t *img);
-void graphics_engine_delete(gn_game_object *go);
+void gn_graphics_add_frect(gn_img_rectangle_t *img);
+void gn_graphics_delete(gn_game_object *go);
 
 #endif //FLAPPYBIRD_GRAPHICS_ENGINE_H
