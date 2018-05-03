@@ -22,7 +22,13 @@ static gboolean button_press_event_cb(GtkWidget *widget,
 
     if (event->button == GDK_BUTTON_PRIMARY) {
 
-        fb_bird_jump(0);
+        if(fb_game_is_running()) {
+
+            fb_bird_jump(0);
+        } else {
+
+            fb_game_start();
+        }
     }
 
     /* We've handled the event, stop processing */
@@ -38,8 +44,7 @@ static void close_window(void) {
 
 static void on_game_over(fb_uint8_t bird_num){
 
-
-    int i = 5;
+    fb_game_stop();
 }
 
 static void game_init(){
@@ -52,8 +57,6 @@ static void game_init(){
     settings.birds_count = 1;
 
     fb_game_init(&settings);
-
-    fb_game_start();
 
 }
 
