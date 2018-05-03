@@ -27,7 +27,7 @@ void gn_engine_stop(void){
     timer_service_delete(gn_phys_next);
     timer_service_delete(gn_graphics_next);
 }
-void gn_engine_restart(void){
+void gn_engine_reset(void){
 
     gn_phys_init();
     gn_graphics_init();

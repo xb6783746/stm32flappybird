@@ -24,6 +24,6 @@ void gn_engine_init(gn_ph_settings_t *settings);
 
 void gn_engine_start(void);
 void gn_engine_stop(void);
-void gn_engine_restart(void);
+void gn_engine_reset(void);
 
 #endif //FLAPPYBIRD_GAME_ENGINE_H

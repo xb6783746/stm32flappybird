@@ -20,5 +20,7 @@ void fb_game_init(fb_game_settings_t *settings);
 void fb_game_start();
 void fb_game_stop();
 
+fb_bool_t fb_game_is_running(void);
+
 
 #endif //FLAPPYBIRD_FLAPPYBIRD_H

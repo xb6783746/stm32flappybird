@@ -13,9 +13,13 @@
 fb_game_settings_t flappybird_settings;
 flappybird_bird_t flappybird_bird_t_arr[BIRDS_BUFFER_CAPACITY];
 
+static fb_bool_t is_running;
+
 static void init_field(void);
 
 void fb_game_init(fb_game_settings_t *arg){
+
+    is_running = FB_FALSE;
 
     flappybird_settings = *arg;
 
@@ -28,13 +32,18 @@ void fb_game_init(fb_game_settings_t *arg){
     engine_settings.bird_horizontal_velocity = BIRD_HORIZONTAL_VELOCITY;
     engine_settings.gravity = GRAVITY;
 
-    fb_object_buffer_init();
     gn_engine_init(&engine_settings);
-
-    init_field();
 }
 
 void fb_game_start(){
+
+    is_running = FB_TRUE;
+
+    fb_object_buffer_init();
+
+    gn_engine_reset();
+
+    init_field();
 
     gn_engine_start();
 
@@ -42,9 +51,16 @@ void fb_game_start(){
 }
 void fb_game_stop(){
 
+    is_running = FB_FALSE;
+
     gn_engine_stop();
 
     fb_go_factory_stop();
+}
+
+fb_bool_t fb_game_is_running(){
+
+    return is_running;
 }
 
 static void init_field(){
