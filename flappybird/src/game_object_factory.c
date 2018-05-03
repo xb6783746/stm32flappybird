@@ -25,7 +25,7 @@ void fb_go_factory_stop(void){
     timer_service_delete(create);
 }
 
-//TODO randomize pipes
+
 static void create(void){
 
     fb_uint16_t from = PIPE_HOLE_SIZE;
@@ -71,28 +71,5 @@ static void add_image(gn_solid_body_t *body, gl_color_t color){
 
     gn_graphics_add_frect(&rect);
 }
-
-//static void create_down(gn_solid_body_t *down_body, fb_uint16_t hole_height){
-//
-//    gn_game_object *go = fb_object_buffer_get_game_object();
-//
-//    down_body->go = go;
-//    down_body->width = PIPE_WIDTH;
-//    down_body->height = (fb_uint16_t) (flappybird_settings.screen_height - hole_height - PIPE_HOLE_SIZE);
-//
-//    go->point.x = flappybird_settings.screen_width - PIPE_WIDTH;
-//    go->point.y = hole_height + PIPE_HOLE_SIZE;
-//
-//    gn_phys_add_solid_body(down_body);
-//
-//    gn_img_rectangle_t rect;
-//
-//    rect.go = go;
-//    rect.width = down_body->width;
-//    rect.height = down_body->height;
-//    rect.color.red = rect.color.green = rect.color.blue = 0;
-//
-//    gn_graphics_add_frect(&rect);
-//}
 
 
