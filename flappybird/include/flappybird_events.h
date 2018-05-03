@@ -4,6 +4,6 @@
 
 #include <platform.h>
 
-void flappybird_tap(fb_uint8_t bird_num);
+void fb_bird_jump(fb_uint8_t bird_num);
 
 #endif //FLAPPYBIRD_FLAPPYBIRD_EVENTS_H

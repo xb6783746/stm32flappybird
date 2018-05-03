@@ -4,8 +4,6 @@
 #include <unity.h>
 #include <internal/collision.h>
 #include <internal/game_field.h>
-#include <memory.h>
-#include <game_structs.h>
 
 #define BIRD_SIZE 5
 #define BODY_SIZE 10
@@ -66,7 +64,7 @@ static void init_field(){
 
     on_deleted_called = 0;
 
-    settings.on_collision = on_collision;
+    settings.on_collision = fb_on_collision;
 
     bird.go = &go[0];
     bird.width = BIRD_SIZE;

@@ -13,7 +13,7 @@ typedef struct fb_bird_buffer_entry_s{
 
 static fb_game_object_buffer_entry_t game_objects[GAME_OBJECT_BUFFER_CAPACITY];
 
-void flappybird_object_buffer_init(void){
+void fb_object_buffer_init(void){
 
     int i;
     for(i = 0; i < GAME_OBJECT_BUFFER_CAPACITY; i++){
@@ -22,7 +22,7 @@ void flappybird_object_buffer_init(void){
     }
 }
 
-void flappybird_object_buffer_release(gn_game_object *go){
+void fb_object_buffer_release(gn_game_object *go){
 
     int i;
     for(i = 0; i < GAME_OBJECT_BUFFER_CAPACITY; i++){
@@ -35,7 +35,7 @@ void flappybird_object_buffer_release(gn_game_object *go){
     }
 }
 
-gn_game_object* flappybird_object_buffer_get_game_object(void){
+gn_game_object* fb_object_buffer_get_game_object(void){
 
     int i;
     for(i = 0; i < GAME_OBJECT_BUFFER_CAPACITY; i++){

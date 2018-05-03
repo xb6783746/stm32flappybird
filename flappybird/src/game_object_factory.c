@@ -15,12 +15,12 @@ static void create(void);
 static void add_pipe(fb_uint16_t hole_height, fb_uint8_t is_upper);
 static void add_image(gn_solid_body_t *body, gl_color_t color);
 
-void flappybird_go_factory_start(void){
+void fb_go_factory_start(void){
 
     timer_service_call_periodically(create, (fb_uint32_t) PERIOD_TICKS);
 }
 
-void flappybird_go_factory_stop(void){
+void fb_go_factory_stop(void){
 
     timer_service_delete(create);
 }
@@ -39,7 +39,7 @@ static void create(void){
 
 static void add_pipe(fb_uint16_t hole_height, fb_uint8_t is_upper){
 
-    gn_game_object *go = flappybird_object_buffer_get_game_object();
+    gn_game_object *go = fb_object_buffer_get_game_object();
 
     gn_solid_body_t body;
 
@@ -74,7 +74,7 @@ static void add_image(gn_solid_body_t *body, gl_color_t color){
 
 //static void create_down(gn_solid_body_t *down_body, fb_uint16_t hole_height){
 //
-//    gn_game_object *go = flappybird_object_buffer_get_game_object();
+//    gn_game_object *go = fb_object_buffer_get_game_object();
 //
 //    down_body->go = go;
 //    down_body->width = PIPE_WIDTH;

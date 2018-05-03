@@ -22,7 +22,7 @@ static gboolean button_press_event_cb(GtkWidget *widget,
 
     if (event->button == GDK_BUTTON_PRIMARY) {
 
-        flappybird_tap(0);
+        fb_bird_jump(0);
     }
 
     /* We've handled the event, stop processing */
@@ -51,9 +51,9 @@ static void game_init(){
     settings.screen_height = 100;
     settings.birds_count = 1;
 
-    flappybird_init(&settings);
+    fb_game_init(&settings);
 
-    flappybird_start();
+    fb_game_start();
 
 }
 

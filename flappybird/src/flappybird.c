@@ -15,7 +15,7 @@ flappybird_bird_t flappybird_bird_t_arr[BIRDS_BUFFER_CAPACITY];
 
 static void init_field(void);
 
-void flappybird_init(fb_game_settings_t *arg){
+void fb_game_init(fb_game_settings_t *arg){
 
     flappybird_settings = *arg;
 
@@ -23,28 +23,28 @@ void flappybird_init(fb_game_settings_t *arg){
 
     engine_settings.screen_width = flappybird_settings.screen_width;
     engine_settings.screen_height = flappybird_settings.screen_height;
-    engine_settings.on_collision = on_collision;
-    engine_settings.on_object_deleted = on_object_deleted;
+    engine_settings.on_collision = fb_on_collision;
+    engine_settings.on_object_deleted = fb_on_object_deleted;
     engine_settings.bird_horizontal_velocity = BIRD_HORIZONTAL_VELOCITY;
     engine_settings.gravity = GRAVITY;
 
-    flappybird_object_buffer_init();
+    fb_object_buffer_init();
     gn_engine_init(&engine_settings);
 
     init_field();
 }
 
-void flappybird_start(){
+void fb_game_start(){
 
     gn_engine_start();
 
-    flappybird_go_factory_start();
+    fb_go_factory_start();
 }
-void flappybird_stop(){
+void fb_game_stop(){
 
     gn_engine_stop();
 
-    flappybird_go_factory_stop();
+    fb_go_factory_stop();
 }
 
 static void init_field(){
@@ -52,7 +52,7 @@ static void init_field(){
     int i;
     for(i = 0; i < flappybird_settings.birds_count; i++){
 
-        gn_game_object *go = flappybird_object_buffer_get_game_object();
+        gn_game_object *go = fb_object_buffer_get_game_object();
 
         flappybird_bird_t_arr[i].go = go;
         flappybird_bird_t_arr[i].hp = BIRD_HP;
