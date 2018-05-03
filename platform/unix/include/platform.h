@@ -4,6 +4,10 @@
 
 #include <stdint.h>
 
+#define FB_TRUE 1
+#define FB_FALSE 0
+#define FB_NULL 0
+
 typedef uint8_t fb_uint8_t;
 typedef int8_t fb_int8_t;
 
@@ -18,5 +22,7 @@ typedef int64_t fb_int64_t;
 
 typedef float fb_float32_t;
 typedef double fb_float64_t;
+
+typedef uint8_t fb_bool_t;
 
 #endif //FLAPPYBIRD_PLATFORM_H
