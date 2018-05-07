@@ -3,16 +3,10 @@
 #include <internal/game_field.h>
 
 
-fb_float32_t step;
 fb_float32_t gravity;
 
-static void move_bodies(void);
-static void move_birds(void);
+static void process_gravity(gn_game_object *go);
 
-void gn_phys_set_step(fb_float32_t arg){
-
-    step = arg * PHYSICS_TIME_STEP;
-}
 
 void gn_phys_set_gravity_internal(fb_float32_t arg){
 
@@ -21,47 +15,41 @@ void gn_phys_set_gravity_internal(fb_float32_t arg){
 
 void gn_phys_move(void){
 
-    move_bodies();
-    move_birds();
-}
-
-static void move_bodies(void){
-
     int i;
-    for(i = 0; i < SOLID_BODIES_BUFFER_CAPACITY; i++){
+    for(i = 0; i < OBJECTS_BUFFER_CAPACITY; i++){
 
-        if(bodies[i].go != NULL){
+        if(objects[i] != NULL){
 
-            bodies[i].go->point.x += step;
+            objects[i]->point.x += objects[i]->horizontal_velocity * PHYSICS_TIME_STEP;
 
-            if(bodies[i].go->point.x + bodies[i].width < 0){
+            if(objects[i]->point.x + objects[i]->width < 0){
 
-                settings.on_object_deleted(bodies[i].go);
+                settings.on_object_deleted(objects[i]);
 
-                bodies[i].go = NULL;
+                objects[i] = NULL;
+                continue;
+            }
+
+            if(!objects[i]->is_static){
+
+                process_gravity(objects[i]);
             }
         }
     }
 }
-static void move_birds(void){
 
-    int i;
-    for(i = 0; i < BIRDS_BUFFER_CAPACITY; i++){
+static void process_gravity(gn_game_object *go){
 
-        if(birds[i].go != NULL){
+    go->vertical_velocity += gravity;
+    go->point.y += go->vertical_velocity * PHYSICS_TIME_STEP;
 
-            birds[i].vertical_velocity += gravity;
-            birds[i].go->point.y += birds[i].vertical_velocity * PHYSICS_TIME_STEP;
+    if(go->point.y + go->height >= settings.screen_height){
 
-            if(birds[i].go->point.y + birds[i].height >= settings.screen_height){
+        go->point.y = settings.screen_height - go->height;
+        go->vertical_velocity = 0;
+    } else if(go->point.y <= 0){
 
-                birds[i].go->point.y = settings.screen_height - birds[i].height;
-                birds[i].vertical_velocity = 0;
-            } else if(birds[i].go->point.y <= 0){
-
-                birds[i].go->point.y = 0;
-                birds[i].vertical_velocity = 0;
-            }
-        }
+        go->point.y = 0;
+        go->vertical_velocity = 0;
     }
 }

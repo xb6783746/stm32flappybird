@@ -18,7 +18,7 @@ void fb_on_collision(gn_game_object *go1, gn_game_object *go2){
     int i;
     for(i = 0; i < BIRDS_BUFFER_CAPACITY; i++){
 
-        if(flappybird_bird_t_arr[i].go == go1){
+        if(flappybird_bird_t_arr[i].go == go1 || flappybird_bird_t_arr[i].go == go2){
 
             flappybird_bird_t_arr[i].hp--;
 

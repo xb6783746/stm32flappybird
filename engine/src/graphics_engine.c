@@ -68,8 +68,8 @@ static void draw_image(gn_img_rectangle_t *img){
 
     frect.point = img->go->point;
     frect.color = img->color;
-    frect.width = img->width;
-    frect.height = img->height;
+    frect.width = img->go->width;
+    frect.height = img->go->height;
 
     graphics_draw_frect(&frect);
 

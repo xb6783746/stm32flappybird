@@ -9,5 +9,5 @@ extern flappybird_bird_t flappybird_bird_t_arr[BIRDS_BUFFER_CAPACITY];
 
 void fb_bird_jump(fb_uint8_t bird_num){
 
-    gn_phys_set_bird_vertical_velocity(bird_num, BIRD_JUMP);
+    flappybird_bird_t_arr[bird_num].go->vertical_velocity = BIRD_JUMP;
 }

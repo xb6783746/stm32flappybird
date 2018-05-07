@@ -4,12 +4,8 @@
 
 #define OBJECT_COUNT 3
 
-static gn_game_object go[2*OBJECT_COUNT];
-
-static gn_bird_t birds_arr[OBJECT_COUNT];
-static gn_solid_body_t bodies_arr[OBJECT_COUNT];
-
-static void init(void);
+static gn_game_object birds_arr[OBJECT_COUNT];
+static gn_game_object bodies_arr[OBJECT_COUNT];
 
 void test_reset_field(void){
 
@@ -18,19 +14,18 @@ void test_reset_field(void){
     int i;
     for(i = 0; i < BIRDS_BUFFER_CAPACITY; i++){
 
-        TEST_ASSERT_EQUAL(birds[i].go, NULL);
+        TEST_ASSERT_EQUAL(birds[i], NULL);
     }
 
     for(i = 0; i < SOLID_BODIES_BUFFER_CAPACITY; i++){
 
-        TEST_ASSERT_EQUAL(bodies[i].go, NULL);
+        TEST_ASSERT_EQUAL(bodies[i], NULL);
     }
 }
 
 
 void test_add_objects(void){
 
-    init();
 
     gn_phys_reset_field();
 
@@ -43,19 +38,8 @@ void test_add_objects(void){
 
     for(i = 0; i < OBJECT_COUNT; i++){
 
-        TEST_ASSERT_EQUAL_MEMORY(&birds[i], &birds_arr[i], sizeof(gn_bird_t));
-        TEST_ASSERT_EQUAL_MEMORY(&bodies[i], &bodies_arr[i], sizeof(gn_solid_body_t));
-    }
-
-}
-
-static void init(void){
-
-    int i;
-    for(i = 0; i < OBJECT_COUNT; i++){
-
-        birds_arr[i].go = &go[i];
-        bodies_arr[i].go = &go[OBJECT_COUNT + i];
+        TEST_ASSERT_EQUAL_MEMORY(birds[i], &birds_arr[i], sizeof(gn_game_object));
+        TEST_ASSERT_EQUAL_MEMORY(bodies[i], &bodies_arr[i], sizeof(gn_game_object));
     }
 
 }

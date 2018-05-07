@@ -68,30 +68,26 @@ static void init_field(){
     int i;
     for(i = 0; i < flappybird_settings.birds_count; i++){
 
-        gn_game_object *go = fb_object_buffer_get_game_object();
+        gn_game_object *bird = fb_object_buffer_get_game_object();
 
-        flappybird_bird_t_arr[i].go = go;
+        flappybird_bird_t_arr[i].go = bird;
         flappybird_bird_t_arr[i].hp = BIRD_HP;
 
-        gn_bird_t bird;
+        bird->width = BIRD_WIDTH;
+        bird->height = BIRD_HEIGHT;
+        bird->vertical_velocity = 0;
 
-        bird.go = go;
-        bird.width = BIRD_WIDTH;
-        bird.height = BIRD_HEIGHT;
-        bird.vertical_velocity = 0;
-
-        go->point.x = BIRD_INITIAL_X + DIST_BETWEEN_BIRDS*i;
-        go->point.y = flappybird_settings.screen_height / 2;
+        bird->point.x = BIRD_INITIAL_X + DIST_BETWEEN_BIRDS*i;
+        bird->point.y = flappybird_settings.screen_height / 2;
+        bird->is_static = FB_FALSE;
 
         gn_img_rectangle_t img;
 
-        img.go = go;
-        img.width = bird.width;
-        img.height =  bird.height;
+        img.go = bird;
         img.color.green = 255;
         img.color.red = img.color.blue = 0;
 
-        gn_phys_add_bird(&bird);
+        gn_phys_add_object(bird);
         gn_graphics_add_frect(&img);
     }
 }

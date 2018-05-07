@@ -15,9 +15,6 @@ typedef struct gn_img_rectangle_s{
 
     gn_game_object *go;
 
-    fb_uint16_t width;
-    fb_uint16_t height;
-
     gl_color_t color;
 } gn_img_rectangle_t;
 
