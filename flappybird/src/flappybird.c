@@ -7,11 +7,9 @@
 #include <flappybird_settings.h>
 #include <physics_engine.h>
 #include <internal/object_buffer.h>
-#include <internal/game_objects.h>
 
 
 fb_game_settings_t flappybird_settings;
-flappybird_bird_t flappybird_bird_t_arr[BIRDS_BUFFER_CAPACITY];
 
 static fb_bool_t is_running;
 
@@ -72,26 +70,25 @@ static void init_field(){
     int i;
     for(i = 0; i < flappybird_settings.birds_count; i++){
 
-        gn_game_object *bird = fb_object_buffer_get_game_object();
+        flappybird_object_t *bird = fb_object_buffer_get_object(Bird);
 
-        flappybird_bird_t_arr[i].go = bird;
-        flappybird_bird_t_arr[i].hp = BIRD_HP;
+        bird->bird.hp = BIRD_HP;
 
-        bird->width = BIRD_WIDTH;
-        bird->height = BIRD_HEIGHT;
-        bird->vertical_velocity = 0;
+        bird->go.width = BIRD_WIDTH;
+        bird->go.height = BIRD_HEIGHT;
+        bird->go.vertical_velocity = 0;
 
-        bird->point.x = BIRD_INITIAL_X + DIST_BETWEEN_BIRDS*i;
-        bird->point.y = flappybird_settings.screen_height / 2;
-        bird->is_static = FB_FALSE;
+        bird->go.point.x = BIRD_INITIAL_X + DIST_BETWEEN_BIRDS*i;
+        bird->go.point.y = flappybird_settings.screen_height / 2;
+        bird->go.is_static = FB_FALSE;
 
         gn_img_rectangle_t img;
 
-        img.go = bird;
+        img.go = &bird->go;
         img.color.green = 255;
         img.color.red = img.color.blue = 0;
 
-        gn_phys_add_object(bird);
+        gn_phys_add_object(&bird->go);
         gn_graphics_add_frect(&img);
     }
 }

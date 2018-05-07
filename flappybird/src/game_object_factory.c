@@ -39,26 +39,26 @@ static void create(void){
 
 static void add_pipe(fb_uint16_t hole_height, fb_uint8_t is_upper){
 
-    gn_game_object *body = fb_object_buffer_get_game_object();
+    flappybird_object_t *body = fb_object_buffer_get_object(Wall);
 
 
-    body->width = PIPE_WIDTH;
-    body->height = is_upper?
+    body->go.width = PIPE_WIDTH;
+    body->go.height = is_upper?
                       hole_height : (fb_uint16_t) (flappybird_settings.screen_height - hole_height - PIPE_HOLE_SIZE);
 
-    body->point.x = flappybird_settings.screen_width - PIPE_WIDTH;
-    body->point.y = is_upper? 0 : hole_height + PIPE_HOLE_SIZE;
+    body->go.point.x = flappybird_settings.screen_width - PIPE_WIDTH;
+    body->go.point.y = is_upper? 0 : hole_height + PIPE_HOLE_SIZE;
 
-    body->horizontal_velocity = BIRD_HORIZONTAL_VELOCITY;
+    body->go.horizontal_velocity = BIRD_HORIZONTAL_VELOCITY;
 
-    body->is_static = FB_TRUE;
+    body->go.is_static = FB_TRUE;
 
-    gn_phys_add_object(body);
+    gn_phys_add_object(&body->go);
 
     gl_color_t color;
     color.red = color.green = color.blue = 0;
 
-    add_image(body, color);
+    add_image(&body->go, color);
 }
 
 static void add_image(gn_game_object *body, gl_color_t color){

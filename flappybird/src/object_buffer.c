@@ -3,15 +3,7 @@
 #include <internal/object_buffer.h>
 
 
-typedef struct fb_bird_buffer_entry_s{
-
-    fb_uint8_t is_free;
-    gn_game_object go;
-
-} fb_game_object_buffer_entry_t;
-
-
-static fb_game_object_buffer_entry_t game_objects[GAME_OBJECT_BUFFER_CAPACITY];
+fb_buffer_entry_t game_objects[GAME_OBJECT_BUFFER_CAPACITY];
 
 void fb_object_buffer_init(void){
 
@@ -27,7 +19,7 @@ void fb_object_buffer_release(gn_game_object *go){
     int i;
     for(i = 0; i < GAME_OBJECT_BUFFER_CAPACITY; i++){
 
-        if(&game_objects[i].go == go) {
+        if(&game_objects[i].obj.go == go) {
 
             game_objects[i].is_free = 1;
             break;
@@ -35,7 +27,7 @@ void fb_object_buffer_release(gn_game_object *go){
     }
 }
 
-gn_game_object* fb_object_buffer_get_game_object(void){
+flappybird_object_t* fb_object_buffer_get_object(flappybird_object_type_t type){
 
     int i;
     for(i = 0; i < GAME_OBJECT_BUFFER_CAPACITY; i++){
@@ -44,9 +36,11 @@ gn_game_object* fb_object_buffer_get_game_object(void){
 
             game_objects[i].is_free = 0;
 
-            return &game_objects[i].go;
+            game_objects[i].obj.type = type;
+
+            return &game_objects[i].obj;
         }
     }
 
-    return 0;
+    return FB_NULL;
 }
