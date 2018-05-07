@@ -2,7 +2,6 @@
 
 add_library(engine STATIC
         src/physics_engine.c
-        src/game_field.c
         src/moving.c
         src/collision.c
         src/game_engine.c
