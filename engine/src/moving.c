@@ -10,7 +10,7 @@ static void process_gravity(gn_game_object *go);
 
 void gn_phys_set_gravity_internal(fb_float32_t arg){
 
-    gravity = arg * PHYSICS_TIME_STEP;
+    gravity = arg * settings.phys_cycle_s;
 }
 
 void gn_phys_move(void){
@@ -20,7 +20,7 @@ void gn_phys_move(void){
 
         if(objects[i] != NULL){
 
-            objects[i]->point.x += objects[i]->horizontal_velocity * PHYSICS_TIME_STEP;
+            objects[i]->point.x += objects[i]->horizontal_velocity * settings.phys_cycle_s;
 
             if(objects[i]->point.x + objects[i]->width < 0){
 
@@ -41,7 +41,7 @@ void gn_phys_move(void){
 static void process_gravity(gn_game_object *go){
 
     go->vertical_velocity += gravity;
-    go->point.y += go->vertical_velocity * PHYSICS_TIME_STEP;
+    go->point.y += go->vertical_velocity * settings.phys_cycle_s;
 
     if(go->point.y + go->height >= settings.screen_height){
 

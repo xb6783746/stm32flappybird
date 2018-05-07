@@ -17,6 +17,9 @@ static fb_bool_t is_running;
 
 static void init_field(void);
 
+static void engine_start();
+static void engine_stop();
+
 void fb_game_init(fb_game_settings_t *arg){
 
     is_running = FB_FALSE;
@@ -29,8 +32,9 @@ void fb_game_init(fb_game_settings_t *arg){
     engine_settings.screen_height = flappybird_settings.screen_height;
     engine_settings.on_collision = fb_on_collision;
     engine_settings.on_object_deleted = fb_on_object_deleted;
-    engine_settings.bird_horizontal_velocity = BIRD_HORIZONTAL_VELOCITY;
     engine_settings.gravity = GRAVITY;
+    engine_settings.phys_cycle_s = PHYSICS_TIME_STEP;
+    engine_settings.graphics_cycle_s = GRAPHICS_TIME_STEP;
 
     gn_engine_init(&engine_settings);
 }
@@ -45,7 +49,7 @@ void fb_game_start(){
 
     init_field();
 
-    gn_engine_start();
+    engine_start();
 
     fb_go_factory_start();
 }
@@ -53,7 +57,7 @@ void fb_game_stop(){
 
     is_running = FB_FALSE;
 
-    gn_engine_stop();
+    engine_stop();
 
     fb_go_factory_stop();
 }
@@ -90,5 +94,16 @@ static void init_field(){
         gn_phys_add_object(bird);
         gn_graphics_add_frect(&img);
     }
+}
+
+static void engine_start(){
+
+    timer_service_call_periodically(gn_phys_next, PHYSICS_CYCLE_TICKS);
+    timer_service_call_periodically(gn_graphics_next, GRAPHICS_CYCLE_TICKS);
+}
+static void engine_stop(){
+
+    timer_service_delete(gn_phys_next);
+    timer_service_delete(gn_graphics_next);
 }
 

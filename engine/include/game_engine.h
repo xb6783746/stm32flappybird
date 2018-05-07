@@ -10,7 +10,6 @@ typedef void (*object_deleted_callback)(gn_game_object *go);
 
 typedef struct gn_ph_settings_s {
 
-    gn_velocity bird_horizontal_velocity;
     collision_callback on_collision;
     object_deleted_callback on_object_deleted;
 
@@ -18,12 +17,13 @@ typedef struct gn_ph_settings_s {
     fb_uint16_t screen_height;
 
     fb_float32_t gravity;
+
+    fb_float32_t phys_cycle_s;
+    fb_float32_t graphics_cycle_s;
 } gn_ph_settings_t;
 
 void gn_engine_init(gn_ph_settings_t *settings);
 
-void gn_engine_start(void);
-void gn_engine_stop(void);
 void gn_engine_reset(void);
 
 #endif //FLAPPYBIRD_GAME_ENGINE_H
