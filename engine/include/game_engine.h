@@ -19,7 +19,6 @@ typedef struct gn_ph_settings_s {
     fb_float32_t gravity;
 
     fb_float32_t phys_cycle_s;
-    fb_float32_t graphics_cycle_s;
 } gn_ph_settings_t;
 
 void gn_engine_init(gn_ph_settings_t *settings);

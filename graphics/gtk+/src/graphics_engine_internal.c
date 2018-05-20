@@ -1,5 +1,5 @@
 
-#include <graphics_engine.h>
+#include <graphics_engine_internal.h>
 #include <graphics.h>
 
 static gl_color_t white;
@@ -8,7 +8,7 @@ static gn_img_rectangle_t image_arr[IMG_BUFFER_CAPACITY];
 
 static void draw_image(gn_img_rectangle_t *img);
 
-void gn_graphics_init(void){
+void gr_init(void){
 
     white.red = 255;
     white.green = 255;
@@ -21,7 +21,7 @@ void gn_graphics_init(void){
     }
 }
 
-void gn_graphics_next(void){
+void gr_update(void){
 
     graphics_clear(white);
 

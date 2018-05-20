@@ -15,6 +15,7 @@ static void process_collision_with_bonus(flappybird_object_t *bird, flappybird_o
 void fb_on_object_deleted(gn_game_object *go){
 
     fb_object_buffer_release(go);
+    gr_delete(go);
 }
 
 void fb_on_collision(gn_game_object *go1, gn_game_object *go2){

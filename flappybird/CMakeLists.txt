@@ -16,6 +16,7 @@ target_include_directories(
         gamelogic PRIVATE
         $<TARGET_PROPERTY:platform,INCLUDE_DIRECTORIES>
         $<TARGET_PROPERTY:engine,INCLUDE_DIRECTORIES>
+        $<TARGET_PROPERTY:graphics,INCLUDE_DIRECTORIES>
 )
 
 target_link_libraries(

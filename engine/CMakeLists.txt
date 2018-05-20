@@ -4,10 +4,9 @@ add_library(engine STATIC
         src/physics_engine.c
         src/moving.c
         src/collision.c
-        src/game_engine.c
-        src/graphics_engine.c)
+        src/game_engine.c)
 
-add_subdirectory(test)
+#add_subdirectory(test)
 
 target_include_directories(
         engine PUBLIC

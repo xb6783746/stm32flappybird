@@ -1,14 +1,53 @@
 
 
 #include <gtk_graphics.h>
+#include <graphics_engine_internal.h>
 #include <graphics.h>
 #include <math.h>
+
 
 cairo_surface_t *surface = NULL;
 GtkWidget *widget;
 
 static gboolean draw_cb(GtkWidget *widget, cairo_t *cr, gpointer data);
 static gboolean configure_event_cb(GtkWidget *widget, GdkEventConfigure *event, gpointer data);
+
+static void add_image(gn_game_object *body, gl_color_t color){
+
+    gn_img_rectangle_t rect;
+
+    rect.go = body;
+
+    rect.color = color;
+
+    gn_graphics_add_frect(&rect);
+}
+
+void gr_add_bird(gn_game_object *go){
+
+    gl_color_t color = {
+            .red = 0,
+            .green = 255,
+            .blue = 0
+    };
+
+    add_image(go, color);
+}
+void gr_add_pipe(gn_game_object *go){
+
+    gl_color_t color = {
+            .red = 0,
+            .green = 0,
+            .blue = 0
+    };
+
+    add_image(go, color);
+}
+
+void gr_delete(gn_game_object *go){
+
+    gn_graphics_delete(go);
+}
 
 void gtk_graphics_init(GtkWidget *wdg){
 

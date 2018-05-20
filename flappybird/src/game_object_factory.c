@@ -5,6 +5,7 @@
 #include <flappybird_settings.h>
 #include <flappybird.h>
 #include <random_service.h>
+#include <graphics_engine.h>
 
 #define PERIOD_TICKS (CREATE_EVERY_S / TIMER_PERIOD_SEC)
 
@@ -55,22 +56,6 @@ static void add_pipe(fb_uint16_t hole_height, fb_uint8_t is_upper){
 
     gn_phys_add_object(&body->go);
 
-    gl_color_t color;
-    color.red = color.green = color.blue = 0;
-
-    add_image(&body->go, color);
+    gr_add_pipe(&body->go);
 }
-
-static void add_image(gn_game_object *body, gl_color_t color){
-
-
-    gn_img_rectangle_t rect;
-
-    rect.go = body;
-
-    rect.color = color;
-
-    gn_graphics_add_frect(&rect);
-}
-
 

@@ -7,6 +7,7 @@
 #include <flappybird_settings.h>
 #include <physics_engine.h>
 #include <internal/object_buffer.h>
+#include <graphics_engine.h>
 
 
 fb_game_settings_t flappybird_settings;
@@ -17,6 +18,8 @@ static void init_field(void);
 
 static void engine_start();
 static void engine_stop();
+
+static void on_next();
 
 void fb_game_init(fb_game_settings_t *arg){
 
@@ -32,9 +35,9 @@ void fb_game_init(fb_game_settings_t *arg){
     engine_settings.on_object_deleted = fb_on_object_deleted;
     engine_settings.gravity = GRAVITY;
     engine_settings.phys_cycle_s = PHYSICS_TIME_STEP;
-    engine_settings.graphics_cycle_s = GRAPHICS_TIME_STEP;
 
     gn_engine_init(&engine_settings);
+    gr_init();
 }
 
 void fb_game_start(){
@@ -82,25 +85,23 @@ static void init_field(){
         bird->go.point.y = flappybird_settings.screen_height / 2;
         bird->go.is_static = FB_FALSE;
 
-        gn_img_rectangle_t img;
-
-        img.go = &bird->go;
-        img.color.green = 255;
-        img.color.red = img.color.blue = 0;
-
         gn_phys_add_object(&bird->go);
-        gn_graphics_add_frect(&img);
+        gr_add_bird(&bird->go);
     }
 }
 
 static void engine_start(){
 
-    timer_service_call_periodically(gn_phys_next, PHYSICS_CYCLE_TICKS);
-    timer_service_call_periodically(gn_graphics_next, GRAPHICS_CYCLE_TICKS);
+    timer_service_call_periodically(on_next, PHYSICS_CYCLE_TICKS);
 }
 static void engine_stop(){
 
     timer_service_delete(gn_phys_next);
-    timer_service_delete(gn_graphics_next);
+}
+
+static void on_next(){
+
+    gn_phys_next();
+    gr_update();
 }
 
