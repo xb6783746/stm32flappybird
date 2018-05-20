@@ -14,7 +14,6 @@ extern fb_game_settings_t flappybird_settings;
 static void create(void);
 
 static void add_pipe(fb_uint16_t hole_height, fb_uint8_t is_upper);
-static void add_image(gn_game_object *body, gl_color_t color);
 
 void fb_go_factory_start(void){
 

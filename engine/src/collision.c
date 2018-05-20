@@ -35,8 +35,8 @@ static void check_object_collisions(gn_game_object *bird, fb_uint8_t from){
 static fb_uint8_t check_collision(gn_game_object *bird, gn_game_object *body){
 
 
-    gl_point_t bird_point = bird->point;
-    gl_point_t body_point = body->point;
+    gn_point_t bird_point = bird->point;
+    gn_point_t body_point = body->point;
 
     fb_float32_t bird_x_w = bird->point.x + bird->width;
     fb_float32_t bird_y_h = bird->point.y + bird->height;

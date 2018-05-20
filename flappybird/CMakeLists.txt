@@ -23,5 +23,6 @@ target_link_libraries(
         gamelogic
         engine
         platform
+        graphics
 )
 

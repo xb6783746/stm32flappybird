@@ -3,13 +3,19 @@
 #ifndef FLAPPYBIRD_GAME_STRUCTS_H
 #define FLAPPYBIRD_GAME_STRUCTS_H
 
-#include <geometric_primitives.h>
+#include <platform.h>
 
 typedef fb_float32_t gn_velocity;
 
+typedef struct gn_point_s {
+
+    fb_float32_t x;
+    fb_float32_t y;
+} gn_point_t;
+
 typedef struct {
 
-    gl_point_t point;
+    gn_point_t point;
 
     fb_uint16_t width;
     fb_uint16_t height;
