@@ -2,6 +2,7 @@
 
 #include <timer_service.h>
 #include <stm32f4xx.h>
+#include <stm32f4_timer.h>
 
 #define CALLBACK_BUFFER_CAPACITY 10
 
