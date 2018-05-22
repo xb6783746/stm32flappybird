@@ -7,7 +7,6 @@
 #include <flappybird_settings.h>
 #include <physics_engine.h>
 #include <internal/object_buffer.h>
-#include <graphics_engine.h>
 
 
 fb_game_settings_t flappybird_settings;
@@ -74,8 +73,6 @@ static void init_field(){
     for(i = 0; i < flappybird_settings.birds_count; i++){
 
         flappybird_object_t *bird = fb_object_buffer_get_object(Bird);
-
-        bird->bird.hp = BIRD_HP;
 
         bird->go.width = BIRD_WIDTH;
         bird->go.height = BIRD_HEIGHT;

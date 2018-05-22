@@ -14,8 +14,6 @@
 #define BIRD_HEIGHT 5
 #define BIRD_HORIZONTAL_VELOCITY -50
 
-#define BIRD_HP 3
-
 #define BIRD_JUMP -35
 
 #define BIRD_INITIAL_X 10

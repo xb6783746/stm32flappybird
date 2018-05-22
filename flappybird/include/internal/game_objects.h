@@ -7,13 +7,12 @@
 
 typedef enum {
 
-    Bird, Wall, Bonus
+    Bird, Wall
 } flappybird_object_type_t;
 
 typedef struct flappybird_bird_s{
 
     fb_uint8_t bird_number;
-    fb_uint8_t hp;
 
 } flappybird_bird_t;
 
@@ -21,17 +20,6 @@ typedef struct flappybird_wall_s{
 
 
 } flappybird_wall_t;
-
-typedef struct flappybird_object_s flappybird_object_t;
-
-typedef void (*bonus_function)(flappybird_object_t *bird, flappybird_object_t *bonus);
-
-typedef struct flappybird_bonus_s {
-
-    bonus_function apply_bonus;
-    fb_uint32_t bonus_time;
-
-} flappybird_bonus_t;
 
 typedef struct flappybird_object_s {
 
@@ -42,7 +30,6 @@ typedef struct flappybird_object_s {
 
         flappybird_bird_t bird;
         flappybird_wall_t wall;
-        flappybird_bonus_t bonus;
     };
 
 } flappybird_object_t;

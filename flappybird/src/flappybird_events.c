@@ -6,7 +6,6 @@
 #include <flappybird_settings.h>
 #include <internal/object_buffer.h>
 
-extern flappybird_bird_t flappybird_bird_t_arr[BIRDS_BUFFER_CAPACITY];
 
 void fb_bird_jump(fb_uint8_t bird_num){
 

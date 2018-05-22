@@ -10,7 +10,6 @@ extern fb_game_settings_t flappybird_settings;
 static void process_collision(flappybird_object_t *go1, flappybird_object_t *go2);
 
 static void process_collision_with_wall(flappybird_object_t *bird, flappybird_object_t *obj);
-static void process_collision_with_bonus(flappybird_object_t *bird, flappybird_object_t *obj);
 
 void fb_on_object_deleted(gn_game_object *go){
 
@@ -53,9 +52,6 @@ static void process_collision(flappybird_object_t *go1, flappybird_object_t *go2
 
     switch (obj->type){
 
-        case Bonus:
-            process_collision_with_bonus(bird, obj);
-            break;
         case Bird:
             break;
         case Wall:
@@ -67,14 +63,5 @@ static void process_collision(flappybird_object_t *go1, flappybird_object_t *go2
 static void process_collision_with_wall(flappybird_object_t *bird, flappybird_object_t *obj){
 
 
-    bird->bird.hp--;
-
-    if(bird->bird.hp <= 0){
-
-        flappybird_settings.on_game_over(bird->bird.bird_number);
-    }
-}
-static void process_collision_with_bonus(flappybird_object_t *bird, flappybird_object_t *obj){
-
-
+    flappybird_settings.on_game_over(bird->bird.bird_number);
 }

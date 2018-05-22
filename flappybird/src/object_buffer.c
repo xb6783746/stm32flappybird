@@ -10,7 +10,7 @@ void fb_object_buffer_init(void){
     int i;
     for(i = 0; i < GAME_OBJECT_BUFFER_CAPACITY; i++){
 
-        game_objects[i].is_free = 1;
+        game_objects[i].is_free = FB_TRUE;
     }
 }
 
@@ -21,7 +21,7 @@ void fb_object_buffer_release(gn_game_object *go){
 
         if(&game_objects[i].obj.go == go) {
 
-            game_objects[i].is_free = 1;
+            game_objects[i].is_free = FB_TRUE;
             break;
         }
     }
@@ -34,7 +34,7 @@ flappybird_object_t* fb_object_buffer_get_object(flappybird_object_type_t type){
 
         if(game_objects[i].is_free){
 
-            game_objects[i].is_free = 0;
+            game_objects[i].is_free = FB_FALSE;
 
             game_objects[i].obj.type = type;
 
