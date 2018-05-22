@@ -5,7 +5,6 @@
 #include <flappybird_settings.h>
 #include <flappybird.h>
 #include <random_service.h>
-#include <graphics_engine.h>
 
 #define PERIOD_TICKS (CREATE_EVERY_S / TIMER_PERIOD_SEC)
 
@@ -31,10 +30,10 @@ static void create(void){
     fb_uint16_t from = PIPE_HOLE_SIZE;
     fb_uint16_t to = (fb_uint16_t) (flappybird_settings.screen_height - 2 * PIPE_HOLE_SIZE);
 
-    fb_uint16_t hole_height = (fb_uint16_t) fb_random_between(from, to); //(fb_uint16_t) fb_random();
+    fb_uint16_t hole_height = (fb_uint16_t) fb_random_between(from, to);
 
-    add_pipe(hole_height, 0);
-    add_pipe(hole_height, 1);
+    add_pipe(hole_height, FB_FALSE);
+    add_pipe(hole_height, FB_TRUE);
 }
 
 static void add_pipe(fb_uint16_t hole_height, fb_uint8_t is_upper){

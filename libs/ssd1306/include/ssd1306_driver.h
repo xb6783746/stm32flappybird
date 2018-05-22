@@ -33,6 +33,4 @@ void ssd1306_driver_fill_region(int16_t x, int16_t y, uint8_t width, uint8_t hei
 void ssd1306_driver_set_pixel(uint8_t x, uint8_t y, ssd1306_pixel_t val);
 void ssd1306_driver_update();
 
-void ssd1306_driver_set_tmp(uint8_t x, uint8_t y, ssd1306_pixel_t val);
-
 #endif //SSD1306_DRIVER_H

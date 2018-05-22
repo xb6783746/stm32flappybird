@@ -147,22 +147,15 @@ void ssd1306_driver_fill_region(int16_t x, int16_t y, uint8_t width, uint8_t hei
 void ssd1306_driver_set_pixel(uint8_t x, uint8_t y, ssd1306_pixel_t val){
 
     if(x >= SSD1306_WIDTH || y >= SSD1306_HEIGHT) {
-        // Don't write outside the buffer
+
         return;
     }
 
-    // Draw in the right color
     if(val == Ssd1306_White) {
         buffer[x + (y / 8) * SSD1306_WIDTH] |= 1 << (y % 8);
     } else {
         buffer[x + (y / 8) * SSD1306_WIDTH] &= ~(1 << (y % 8));
     }
-}
-
-void ssd1306_driver_set_tmp(uint8_t x, uint8_t y, ssd1306_pixel_t val){
-
-    buffer[0] = 0xFF;
-    buffer[11] = 0;
 }
 
 void ssd1306_driver_update(){

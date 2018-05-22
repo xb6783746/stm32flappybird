@@ -21,11 +21,11 @@ static callback_array_entry_t callbacks[CALLBACK_BUFFER_CAPACITY];
 
 void TIM2_IRQHandler(void){
 
-    if(TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET){
+    if(TIM_GetITStatus(TIM, TIM_IT_Update) != RESET){
 
         flag = 1;
 
-        TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+        TIM_ClearITPendingBit(TIM, TIM_IT_Update);
     }
 }
 
