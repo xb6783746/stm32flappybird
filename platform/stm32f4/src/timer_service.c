@@ -61,7 +61,7 @@ void timer_service_call_periodically(void_callback clb, fb_uint32_t ticks){
     int i;
     for(i = 0; i < CALLBACK_BUFFER_CAPACITY; i++){
 
-        if(callbacks[i].clb == NULL){
+        if(callbacks[i].clb == FB_NULL){
 
             callbacks[i].clb = clb;
             callbacks[i].ticks = ticks;
@@ -78,7 +78,7 @@ void timer_service_delete(void_callback clb){
 
         if(callbacks[i].clb == clb){
 
-            callbacks[i].clb = NULL;
+            callbacks[i].clb = FB_NULL;
             break;
         }
     }
@@ -93,7 +93,7 @@ void stm32f4_timer_next(void){
         int i;
         for(i = 0; i < CALLBACK_BUFFER_CAPACITY; i++){
 
-            if(callbacks[i].clb != NULL){
+            if(callbacks[i].clb != FB_NULL){
 
                 callbacks[i].curr_ticks++;
 

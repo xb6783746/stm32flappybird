@@ -18,7 +18,7 @@ void gn_phys_move(void){
     int i;
     for(i = 0; i < OBJECTS_BUFFER_CAPACITY; i++){
 
-        if(objects[i] != NULL){
+        if(objects[i] != FB_NULL){
 
             objects[i]->point.x += objects[i]->horizontal_velocity * settings.phys_cycle_s;
 
@@ -26,7 +26,7 @@ void gn_phys_move(void){
 
                 settings.on_object_deleted(objects[i]);
 
-                objects[i] = NULL;
+                objects[i] = FB_NULL;
                 continue;
             }
 

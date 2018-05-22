@@ -11,7 +11,7 @@ void gn_phys_process_collision(){
     fb_uint8_t i;
     for(i = 0; i < OBJECTS_BUFFER_CAPACITY; i++){
 
-        if(objects[i] != NULL) {
+        if(objects[i] != FB_NULL) {
 
             check_object_collisions(objects[i], i);
         }
@@ -23,7 +23,7 @@ static void check_object_collisions(gn_game_object *bird, fb_uint8_t from){
     int i;
     for(i = from + 1; i < OBJECTS_BUFFER_CAPACITY; i++){
 
-        if(objects[i] != NULL) {
+        if(objects[i] != FB_NULL) {
 
             if(check_collision(bird, objects[i])){
 

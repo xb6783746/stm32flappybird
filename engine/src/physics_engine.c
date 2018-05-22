@@ -27,7 +27,7 @@ void gn_phys_add_object(gn_game_object *obj){
     int i;
     for(i = 0; i < OBJECTS_BUFFER_CAPACITY; i++){
 
-        if(objects[i] == NULL){
+        if(objects[i] == FB_NULL){
 
             objects[i] = obj;
             break;
@@ -40,7 +40,7 @@ void gn_phys_reset_field(void){
     int i;
     for(i = 0; i < OBJECTS_BUFFER_CAPACITY; i++){
 
-        objects[i] = NULL;
+        objects[i] = FB_NULL;
     }
 }
 
