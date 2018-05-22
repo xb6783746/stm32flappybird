@@ -1,0 +1,16 @@
+
+
+#ifndef FLAPPYBIRD_STM32F4_TIMER_H
+#define FLAPPYBIRD_STM32F4_TIMER_H
+
+#define PWM_TIM_FREQ 100000
+
+#define TIM TIM2
+#define TIM_CLK 84000000
+
+#define TIM_IRQ TIM2_IRQn
+#define TIM_RCC RCC_APB1Periph_TIM2
+
+void stm32f4_timer_next(void);
+
+#endif //FLAPPYBIRD_STM32F4_TIMER_H
