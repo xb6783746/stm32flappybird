@@ -93,7 +93,7 @@ static void engine_start(){
 }
 static void engine_stop(){
 
-    timer_service_delete(gn_phys_next);
+    timer_service_delete(on_next);
 }
 
 static void on_next(){
