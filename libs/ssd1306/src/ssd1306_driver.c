@@ -1,7 +1,7 @@
 
 #include <ssd1306_driver.h>
 
-
+//High - not selected
 #define CS_HIGH() GPIO_WriteBit(SSD1306_CS_Port, SSD1306_CS_Pin, Bit_SET)
 #define CS_LOW() GPIO_WriteBit(SSD1306_CS_Port, SSD1306_CS_Pin, Bit_RESET)
 
@@ -13,11 +13,6 @@
 
 static uint8_t buffer[SSD1306_WIDTH * SSD1306_HEIGHT / 8];
 
-static void delay(uint32_t cnt){
-
-    int i;
-    for(i = 0; i < cnt*1000; i++);
-}
 
 static void send_byte(uint8_t data){
 
@@ -41,13 +36,8 @@ static void send_data(uint8_t *data, uint16_t size){
 
 void ssd1306_driver_init(){
 
-    // Reset OLED
     ssd1306_driver_reset();
 
-    // Wait for the screen to boot
-    delay(100);
-
-    // Init OLED
     ssd1306_driver_send_command(0xAE); //display off
 
     ssd1306_driver_send_command(0x20); //Set Memory Addressing Mode
@@ -94,24 +84,19 @@ void ssd1306_driver_init(){
     ssd1306_driver_send_command(0x14); //
     ssd1306_driver_send_command(0xAF); //--turn on SSD1306 panel
 
-    // Clear screen
     ssd1306_driver_fill(Ssd1306_Black);
 
-    // Flush buffer to screen
     ssd1306_driver_update();
 
 }
 
 void ssd1306_driver_reset(){
 
-    // CS = High (not selected)
     CS_HIGH();
 
-    // Reset the OLED
     RESET_LOW();
-    delay(10);
     RESET_HIGH();
-    delay(10);
+    
 }
 
 void ssd1306_driver_send_command(uint8_t command){
