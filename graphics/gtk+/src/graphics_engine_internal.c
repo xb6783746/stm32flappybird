@@ -17,7 +17,7 @@ void gr_init(void){
     int i;
     for(i = 0; i < IMG_BUFFER_CAPACITY; i++){
 
-        image_arr[i].go = NULL;
+        image_arr[i].go = FB_NULL;
     }
 }
 
@@ -28,7 +28,7 @@ void gr_update(void){
     int i;
     for(i = 0; i < IMG_BUFFER_CAPACITY; i++){
 
-        if(image_arr[i].go != NULL){
+        if(image_arr[i].go != FB_NULL){
 
             draw_image(&image_arr[i]);
         }
@@ -40,7 +40,7 @@ void gn_graphics_add_frect(gn_img_rectangle_t *img){
     int i;
     for(i = 0; i < IMG_BUFFER_CAPACITY; i++){
 
-        if(image_arr[i].go == NULL){
+        if(image_arr[i].go == FB_NULL){
 
             image_arr[i] = *img;
             break;
@@ -48,14 +48,14 @@ void gn_graphics_add_frect(gn_img_rectangle_t *img){
     }
 }
 
-void gn_graphics_delete(gn_game_object *go){
+void gn_graphics_delete(pe_game_object *go){
 
     int i;
     for(i = 0; i < IMG_BUFFER_CAPACITY; i++){
 
-        if(image_arr[i].go != NULL && image_arr[i].go == go){
+        if(image_arr[i].go != FB_NULL && image_arr[i].go == go){
 
-            image_arr[i].go = NULL;
+            image_arr[i].go = FB_NULL;
         }
     }
 }
@@ -66,7 +66,9 @@ static void draw_image(gn_img_rectangle_t *img){
 
     gl_filled_rectangle_t frect;
 
-    frect.point = img->go->point;
+
+    frect.point.x = img->go->point.x;
+    frect.point.y = img->go->point.y;
     frect.color = img->color;
     frect.width = img->go->width;
     frect.height = img->go->height;

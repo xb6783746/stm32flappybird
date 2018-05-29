@@ -12,7 +12,7 @@ GtkWidget *widget;
 static gboolean draw_cb(GtkWidget *widget, cairo_t *cr, gpointer data);
 static gboolean configure_event_cb(GtkWidget *widget, GdkEventConfigure *event, gpointer data);
 
-static void add_image(gn_game_object *body, gl_color_t color){
+static void add_image(pe_game_object *body, gl_color_t color){
 
     gn_img_rectangle_t rect;
 
@@ -23,7 +23,7 @@ static void add_image(gn_game_object *body, gl_color_t color){
     gn_graphics_add_frect(&rect);
 }
 
-void gr_add_bird(gn_game_object *go){
+void gr_add_bird(pe_game_object *go){
 
     gl_color_t color = {
             .red = 0,
@@ -33,7 +33,7 @@ void gr_add_bird(gn_game_object *go){
 
     add_image(go, color);
 }
-void gr_add_wall(gn_game_object *go){
+void gr_add_wall(pe_game_object *go){
 
     gl_color_t color = {
             .red = 0,
@@ -44,7 +44,7 @@ void gr_add_wall(gn_game_object *go){
     add_image(go, color);
 }
 
-void gr_delete(gn_game_object *go){
+void gr_delete(pe_game_object *go){
 
     gn_graphics_delete(go);
 }
