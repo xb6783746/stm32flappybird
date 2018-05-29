@@ -33,7 +33,7 @@ void gr_add_bird(gn_game_object *go){
 
     add_image(go, color);
 }
-void gr_add_pipe(gn_game_object *go){
+void gr_add_wall(gn_game_object *go){
 
     gl_color_t color = {
             .red = 0,

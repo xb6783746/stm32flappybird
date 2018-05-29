@@ -7,18 +7,14 @@
 
 static pe_game_object* buffer[IMG_BUFFER_COUNT];
 
+static void reset_buffer(void);
 static void add_to_buffer(pe_game_object *go);
 static void draw_rect(pe_game_object *go);
 
 void gr_init(void){
 
     ssd1306_driver_init();
-
-    int i;
-    for(i = 0; i < IMG_BUFFER_COUNT; i++){
-
-        buffer[i] = FB_NULL;
-    }
+    reset_buffer();
 }
 
 void gr_update(void){
@@ -41,7 +37,7 @@ void gr_add_bird(pe_game_object *go){
 
     add_to_buffer(go);
 }
-void gr_add_pipe(pe_game_object *go){
+void gr_add_wall(pe_game_object *go){
 
     add_to_buffer(go);
 }
@@ -71,7 +67,20 @@ static void add_to_buffer(pe_game_object *go){
     }
 }
 
+static void reset_buffer(void){
+
+    int i;
+    for(i = 0; i < IMG_BUFFER_COUNT; i++){
+
+        buffer[i] = FB_NULL;
+    }
+}
+
 static void draw_rect(pe_game_object *go){
 
-    ssd1306_driver_fill_region((int16_t) go->point.x, (int16_t) go->point.y, go->width, go->height, Ssd1306_White);
+    ssd1306_driver_fill_region(
+            (int16_t) go->point.x, (int16_t) go->point.y,
+            go->width, go->height,
+            Ssd1306_White
+    );
 }

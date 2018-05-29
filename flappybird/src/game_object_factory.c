@@ -55,6 +55,6 @@ static void add_wall(fb_uint16_t hole_y_pos, fb_uint8_t is_upper){
 
     phys_engine_add_object(&body->go);
 
-    gr_add_pipe(&body->go);
+    gr_add_wall(&body->go);
 }
 
