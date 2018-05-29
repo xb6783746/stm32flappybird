@@ -7,6 +7,7 @@
 #include <flappybird_settings.h>
 #include <internal/object_buffer.h>
 
+#define PHYSICS_TICKS (PHYS_ENGINE_CYCLE_MS / TIMER_PERIOD_MSEC)
 
 fb_game_settings_t flappybird_settings;
 
@@ -32,7 +33,6 @@ void fb_game_init(fb_game_settings_t arg){
     engine_settings.on_collision = fb_on_collision;
     engine_settings.on_object_deleted = fb_on_object_deleted;
     engine_settings.gravity = GRAVITY;
-    engine_settings.phys_cycle_s = PHYSICS_TIME_STEP;
 
     phys_engine_init(engine_settings);
     gr_init();
@@ -88,7 +88,7 @@ static void init_field(){
 
 static void engine_start(){
 
-    timer_service_call_periodically(on_next, PHYSICS_CYCLE_TICKS);
+    timer_service_call_periodically(on_next, PHYSICS_TICKS);
 }
 static void engine_stop(){
 

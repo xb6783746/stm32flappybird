@@ -6,6 +6,7 @@
 #include <game_structs.h>
 
 #define PHYS_ENGINE_OBJECT_BUFFER_CAPACITY 15
+#define PHYS_ENGINE_CYCLE_MS 30
 
 typedef void (*pe_collision_callback)(pe_game_object *go1, pe_game_object *go2);
 typedef void (*pe_object_deleted_callback)(pe_game_object *go);
@@ -19,8 +20,6 @@ typedef struct pe_settings_s {
     fb_uint16_t screen_height;
 
     fb_float32_t gravity;
-
-    fb_float32_t phys_cycle_s;
 } pe_settings_t;
 
 void phys_engine_init(pe_settings_t settings);
