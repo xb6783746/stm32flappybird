@@ -14,7 +14,7 @@ void fb_object_buffer_init(void){
     }
 }
 
-void fb_object_buffer_release(gn_game_object *go){
+void fb_object_buffer_release(pe_game_object *go){
 
     int i;
     for(i = 0; i < GAME_OBJECT_BUFFER_CAPACITY; i++){

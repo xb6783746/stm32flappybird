@@ -24,7 +24,7 @@ typedef struct flappybird_wall_s{
 typedef struct flappybird_object_s {
 
     flappybird_object_type_t type;
-    gn_game_object go;
+    pe_game_object go;
 
     union {
 

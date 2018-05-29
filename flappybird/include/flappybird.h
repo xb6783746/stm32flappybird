@@ -15,7 +15,7 @@ typedef struct fb_game_settings_s {
     fb_uint16_t screen_height;
 } fb_game_settings_t;
 
-void fb_game_init(fb_game_settings_t *settings);
+void fb_game_init(fb_game_settings_t settings);
 
 void fb_game_start();
 void fb_game_stop();

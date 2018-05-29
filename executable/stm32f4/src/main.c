@@ -142,7 +142,7 @@ static void game_init(){
     settings.screen_height = 64;
     settings.birds_count = 1;
 
-    fb_game_init(&settings);
+    fb_game_init(settings);
 
 }
 

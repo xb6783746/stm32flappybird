@@ -5,6 +5,7 @@
 #include <flappybird_settings.h>
 #include <flappybird.h>
 #include <random_service.h>
+#include <physics_engine.h>
 
 #define PERIOD_TICKS (CREATE_EVERY_S / TIMER_PERIOD_SEC)
 
@@ -52,7 +53,7 @@ static void add_pipe(fb_uint16_t hole_height, fb_uint8_t is_upper){
 
     body->go.is_static = FB_TRUE;
 
-    gn_phys_add_object(&body->go);
+    phys_engine_add_object(&body->go);
 
     gr_add_pipe(&body->go);
 }

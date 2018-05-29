@@ -3,24 +3,25 @@
 #include <internal/game_field.h>
 
 
-fb_float32_t gravity;
+#define PHYS_CYCLE_S ((PHYS_ENGINE_CYCLE_MS) / 1000.0f)
 
-static void process_gravity(gn_game_object *go);
+fb_float32_t velocity_step;
 
+static void process_gravity(pe_game_object *go);
 
-void gn_phys_set_gravity_internal(fb_float32_t arg){
+void phys_engine_set_gravity_internal(fb_float32_t arg){
 
-    gravity = arg * settings.phys_cycle_s;
+    velocity_step = arg * PHYS_CYCLE_S;
 }
 
-void gn_phys_move(void){
+void phys_engine_move(void){
 
     int i;
-    for(i = 0; i < OBJECTS_BUFFER_CAPACITY; i++){
+    for(i = 0; i < PHYS_ENGINE_OBJECT_BUFFER_CAPACITY; i++){
 
         if(objects[i] != FB_NULL){
 
-            objects[i]->point.x += objects[i]->horizontal_velocity * settings.phys_cycle_s;
+            objects[i]->point.x += objects[i]->horizontal_velocity * PHYS_CYCLE_S;
 
             if(objects[i]->point.x + objects[i]->width < 0){
 
@@ -38,10 +39,10 @@ void gn_phys_move(void){
     }
 }
 
-static void process_gravity(gn_game_object *go){
+static void process_gravity(pe_game_object *go){
 
-    go->vertical_velocity += gravity;
-    go->point.y += go->vertical_velocity * settings.phys_cycle_s;
+    go->vertical_velocity += velocity_step;
+    go->point.y += go->vertical_velocity * PHYS_CYCLE_S;
 
     if(go->point.y + go->height >= settings.screen_height){
 

@@ -5,10 +5,10 @@
 #define IMG_BUFFER_COUNT 15
 
 
-static gn_game_object* buffer[IMG_BUFFER_COUNT];
+static pe_game_object* buffer[IMG_BUFFER_COUNT];
 
-static void add_to_buffer(gn_game_object *go);
-static void draw_rect(gn_game_object *go);
+static void add_to_buffer(pe_game_object *go);
+static void draw_rect(pe_game_object *go);
 
 void gr_init(void){
 
@@ -37,16 +37,16 @@ void gr_update(void){
     ssd1306_driver_update();
 }
 
-void gr_add_bird(gn_game_object *go){
+void gr_add_bird(pe_game_object *go){
 
     add_to_buffer(go);
 }
-void gr_add_pipe(gn_game_object *go){
+void gr_add_pipe(pe_game_object *go){
 
     add_to_buffer(go);
 }
 
-void gr_delete(gn_game_object *go){
+void gr_delete(pe_game_object *go){
 
     int i;
     for(i = 0; i < IMG_BUFFER_COUNT; i++){
@@ -58,7 +58,7 @@ void gr_delete(gn_game_object *go){
     }
 }
 
-static void add_to_buffer(gn_game_object *go){
+static void add_to_buffer(pe_game_object *go){
 
     int i;
     for(i = 0; i < IMG_BUFFER_COUNT; i++){
@@ -71,7 +71,7 @@ static void add_to_buffer(gn_game_object *go){
     }
 }
 
-static void draw_rect(gn_game_object *go){
+static void draw_rect(pe_game_object *go){
 
     ssd1306_driver_fill_region((int16_t) go->point.x, (int16_t) go->point.y, go->width, go->height, Ssd1306_White);
 }

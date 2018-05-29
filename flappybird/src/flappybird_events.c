@@ -1,7 +1,6 @@
 
 
 #include <flappybird_events.h>
-#include <physics_engine.h>
 #include <internal/game_objects.h>
 #include <flappybird_settings.h>
 #include <internal/object_buffer.h>

@@ -1,6 +1,5 @@
 
 
-#include <physics_engine.h>
 #include <internal/game_objects.h>
 #include <flappybird.h>
 #include <internal/object_buffer.h>
@@ -11,13 +10,13 @@ static void process_collision(flappybird_object_t *go1, flappybird_object_t *go2
 
 static void process_collision_with_wall(flappybird_object_t *bird, flappybird_object_t *obj);
 
-void fb_on_object_deleted(gn_game_object *go){
+void fb_on_object_deleted(pe_game_object *go){
 
     fb_object_buffer_release(go);
     gr_delete(go);
 }
 
-void fb_on_collision(gn_game_object *go1, gn_game_object *go2){
+void fb_on_collision(pe_game_object *go1, pe_game_object *go2){
 
     int i;
 
@@ -26,7 +25,7 @@ void fb_on_collision(gn_game_object *go1, gn_game_object *go2){
 
     for(i = 0; i < GAME_OBJECT_BUFFER_CAPACITY; i++){
 
-        gn_game_object *go = &game_objects[i].obj.go;
+        pe_game_object *go = &game_objects[i].obj.go;
 
         if(go == go1){
 

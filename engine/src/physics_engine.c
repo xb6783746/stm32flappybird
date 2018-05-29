@@ -1,31 +1,31 @@
 
+
 #include <physics_engine.h>
 #include <internal/moving.h>
 #include <internal/collision.h>
-#include <internal/game_field.h>
 
-gn_game_object *objects[OBJECTS_BUFFER_CAPACITY];
+static void phys_init(void);
+static void reset_field(void);
 
+pe_settings_t settings;
+pe_game_object *objects[PHYS_ENGINE_OBJECT_BUFFER_CAPACITY];
 
-void gn_phys_init(void){
+void phys_engine_init(pe_settings_t arg){
 
-    gn_phys_set_gravity(settings.gravity);
+    settings = arg;
 
-    gn_phys_reset_field();
+    phys_init();
 }
 
+void phys_engine_reset(void){
 
-void gn_phys_set_gravity(fb_float32_t gravity){
-
-    settings.gravity = gravity;
-
-    gn_phys_set_gravity_internal(gravity);
+    phys_init();
 }
 
-void gn_phys_add_object(gn_game_object *obj){
+void phys_engine_add_object(pe_game_object *obj){
 
     int i;
-    for(i = 0; i < OBJECTS_BUFFER_CAPACITY; i++){
+    for(i = 0; i < PHYS_ENGINE_OBJECT_BUFFER_CAPACITY; i++){
 
         if(objects[i] == FB_NULL){
 
@@ -35,20 +35,30 @@ void gn_phys_add_object(gn_game_object *obj){
     }
 }
 
-void gn_phys_reset_field(void){
+void phys_engine_set_gravity(fb_float32_t gravity){
+
+    settings.gravity = gravity;
+    phys_engine_set_gravity_internal(gravity);
+}
+
+void phys_engine_next(){
+
+    phys_engine_move();
+    phys_engine_process_collision();
+}
+
+static void reset_field(void){
 
     int i;
-    for(i = 0; i < OBJECTS_BUFFER_CAPACITY; i++){
+    for(i = 0; i < PHYS_ENGINE_OBJECT_BUFFER_CAPACITY; i++){
 
         objects[i] = FB_NULL;
     }
 }
 
-void gn_phys_next(){
+static void phys_init(void){
 
-    gn_phys_move();
-    gn_phys_process_collision();
+    reset_field();
+
+    phys_engine_set_gravity_internal(settings.gravity);
 }
-
-
-

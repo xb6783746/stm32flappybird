@@ -1,11 +1,10 @@
 
 #include <platform.h>
 #include <flappybird.h>
-#include <game_engine.h>
+#include <physics_engine.h>
 #include <internal/game_object_factory.h>
 #include <internal/engine_event_handler.h>
 #include <flappybird_settings.h>
-#include <physics_engine.h>
 #include <internal/object_buffer.h>
 
 
@@ -20,13 +19,13 @@ static void engine_stop();
 
 static void on_next();
 
-void fb_game_init(fb_game_settings_t *arg){
+void fb_game_init(fb_game_settings_t arg){
 
     is_running = FB_FALSE;
 
-    flappybird_settings = *arg;
+    flappybird_settings = arg;
 
-    gn_ph_settings_t engine_settings;
+    pe_settings_t engine_settings;
 
     engine_settings.screen_width = flappybird_settings.screen_width;
     engine_settings.screen_height = flappybird_settings.screen_height;
@@ -35,7 +34,7 @@ void fb_game_init(fb_game_settings_t *arg){
     engine_settings.gravity = GRAVITY;
     engine_settings.phys_cycle_s = PHYSICS_TIME_STEP;
 
-    gn_engine_init(&engine_settings);
+    phys_engine_init(engine_settings);
     gr_init();
 }
 
@@ -45,7 +44,7 @@ void fb_game_start(){
 
     fb_object_buffer_init();
 
-    gn_engine_reset();
+    phys_engine_reset();
 
     init_field();
 
@@ -82,7 +81,7 @@ static void init_field(){
         bird->go.point.y = flappybird_settings.screen_height / 2;
         bird->go.is_static = FB_FALSE;
 
-        gn_phys_add_object(&bird->go);
+        phys_engine_add_object(&bird->go);
         gr_add_bird(&bird->go);
     }
 }
@@ -98,7 +97,7 @@ static void engine_stop(){
 
 static void on_next(){
 
-    gn_phys_next();
+    phys_engine_next();
     gr_update();
 }
 
