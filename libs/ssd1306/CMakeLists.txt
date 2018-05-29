@@ -9,9 +9,6 @@ target_include_directories(
         include
 )
 
-add_definitions(
-        -DSTM32F4
-)
 target_link_libraries(
         ssd1306
         spl

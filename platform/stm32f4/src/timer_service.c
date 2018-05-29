@@ -33,27 +33,27 @@ void timer_service_init(){
 
     RCC_APB1PeriphClockCmd(TIM_RCC, ENABLE);
 
-    TIM_TimeBaseInitTypeDef timerInit;
+    TIM_TimeBaseInitTypeDef timer_init;
 
-    timerInit.TIM_Period = TIM_PERIOD;
-    timerInit.TIM_Prescaler = TIM_PRESCALER;
-    timerInit.TIM_ClockDivision = 0;
-    timerInit.TIM_CounterMode = TIM_CounterMode_Up;
+    timer_init.TIM_Period = TIM_PERIOD;
+    timer_init.TIM_Prescaler = TIM_PRESCALER;
+    timer_init.TIM_ClockDivision = 0;
+    timer_init.TIM_CounterMode = TIM_CounterMode_Up;
 
-    TIM_TimeBaseInit(TIM, &timerInit);
+    TIM_TimeBaseInit(TIM, &timer_init);
 
     TIM_Cmd(TIM, ENABLE);
 
     TIM_ITConfig(TIM, TIM_IT_Update, ENABLE);
 
-    NVIC_InitTypeDef nvicInit;
+    NVIC_InitTypeDef nvic_init;
 
-    nvicInit.NVIC_IRQChannel = TIM_IRQ;
-    nvicInit.NVIC_IRQChannelPreemptionPriority = 0;
-    nvicInit.NVIC_IRQChannelSubPriority = 1;
-    nvicInit.NVIC_IRQChannelCmd = ENABLE;
+    nvic_init.NVIC_IRQChannel = TIM_IRQ;
+    nvic_init.NVIC_IRQChannelPreemptionPriority = 0;
+    nvic_init.NVIC_IRQChannelSubPriority = 1;
+    nvic_init.NVIC_IRQChannelCmd = ENABLE;
 
-    NVIC_Init(&nvicInit);
+    NVIC_Init(&nvic_init);
 }
 
 void timer_service_call_periodically(void_callback clb, fb_uint32_t ticks){

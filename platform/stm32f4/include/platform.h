@@ -4,8 +4,8 @@
 
 #include <stdint.h>
 
-#define FB_TRUE 1
 #define FB_FALSE 0
+#define FB_TRUE !FB_FALSE
 #define FB_NULL 0
 
 typedef uint8_t fb_uint8_t;

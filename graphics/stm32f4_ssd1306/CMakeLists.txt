@@ -10,13 +10,10 @@ target_include_directories(
         ../include
 )
 
-target_include_directories(
-        graphics PRIVATE
-        $<TARGET_PROPERTY:platform,INCLUDE_DIRECTORIES>
-        $<TARGET_PROPERTY:engine,INCLUDE_DIRECTORIES>
-)
 
 target_link_libraries(
         graphics
+        platform
+        engine
         ssd1306
 )

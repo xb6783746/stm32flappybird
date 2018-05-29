@@ -7,10 +7,6 @@ include(CTest)
 
 set(GRAPHICS_LIB SSD1306)
 
-add_definitions(
-        -DSTM32F4
-)
-
 add_subdirectory(engine)
 add_subdirectory(libs)
 add_subdirectory(platform)
