@@ -3,11 +3,11 @@
 #include <flappybird.h>
 #include <physics_engine.h>
 #include <internal/game_object_factory.h>
-#include <internal/engine_event_handler.h>
+#include <internal/physics_engine_event_handler.h>
 #include <flappybird_settings.h>
 #include <internal/object_buffer.h>
 
-#define PHYSICS_TICKS (PHYS_ENGINE_CYCLE_MS / TIMER_PERIOD_MSEC)
+#define PHYSICS_ENGINE_CYCLE_TICKS (PHYS_ENGINE_CYCLE_MS / TIMER_PERIOD_MSEC)
 
 fb_game_settings_t flappybird_settings;
 
@@ -15,8 +15,8 @@ static fb_bool_t is_running;
 
 static void init_field(void);
 
-static void engine_start();
-static void engine_stop();
+static void timer_start();
+static void timer_end();
 
 static void on_next();
 
@@ -48,7 +48,7 @@ void fb_game_start(){
 
     init_field();
 
-    engine_start();
+    timer_start();
 
     fb_go_factory_start();
 }
@@ -56,7 +56,7 @@ void fb_game_stop(){
 
     is_running = FB_FALSE;
 
-    engine_stop();
+    timer_end();
 
     fb_go_factory_stop();
 }
@@ -69,7 +69,7 @@ fb_bool_t fb_game_is_running(){
 static void init_field(){
 
     int i;
-    for(i = 0; i < flappybird_settings.birds_count; i++){
+    for(i = 0; i < BIRD_COUNT; i++){
 
         flappybird_object_t *bird = fb_object_buffer_get_object(Bird);
 
@@ -86,11 +86,11 @@ static void init_field(){
     }
 }
 
-static void engine_start(){
+static void timer_start(){
 
-    timer_service_call_periodically(on_next, PHYSICS_TICKS);
+    timer_service_call_periodically(on_next, PHYSICS_ENGINE_CYCLE_TICKS);
 }
-static void engine_stop(){
+static void timer_end(){
 
     timer_service_delete(on_next);
 }

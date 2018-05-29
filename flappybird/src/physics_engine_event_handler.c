@@ -36,12 +36,14 @@ void fb_on_collision(pe_game_object *go1, pe_game_object *go2){
 
             obj2 = &game_objects[i].obj;
         }
+
+        if(obj1 != FB_NULL && obj2 != FB_NULL) {
+
+            break;
+        }
     }
 
-    if(obj1 != FB_NULL && obj2 != FB_NULL) {
-
-        process_collision(obj1, obj2);
-    }
+    process_collision(obj1, obj2);
 }
 
 static void process_collision(flappybird_object_t *go1, flappybird_object_t *go2){
@@ -60,7 +62,6 @@ static void process_collision(flappybird_object_t *go1, flappybird_object_t *go2
 }
 
 static void process_collision_with_wall(flappybird_object_t *bird, flappybird_object_t *obj){
-
 
     flappybird_settings.on_game_over(bird->bird.bird_number);
 }

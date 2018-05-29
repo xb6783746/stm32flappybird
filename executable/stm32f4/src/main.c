@@ -140,7 +140,6 @@ static void game_init(){
     settings.on_game_over = on_game_over;
     settings.screen_width = 128;
     settings.screen_height = 64;
-    settings.birds_count = 1;
 
     fb_game_init(settings);
 

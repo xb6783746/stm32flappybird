@@ -8,7 +8,6 @@ typedef void (*on_game_over_callback)(fb_uint8_t bird_num);
 
 typedef struct fb_game_settings_s {
 
-    fb_uint8_t birds_count;
     on_game_over_callback on_game_over;
 
     fb_uint16_t screen_width;
