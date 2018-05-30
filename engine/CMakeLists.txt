@@ -5,7 +5,10 @@ add_library(engine STATIC
         src/collision.c
         src/physics_engine.c)
 
-#add_subdirectory(test)
+if (PLATFORM MATCHES UNIX)
+
+    add_subdirectory(test)
+endif ()
 
 target_include_directories(
         engine PUBLIC

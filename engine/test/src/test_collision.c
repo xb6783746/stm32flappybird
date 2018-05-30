@@ -3,37 +3,40 @@
 
 #include <unity.h>
 #include <internal/collision.h>
-#include <internal/game_field.h>
+#include <physics_engine.h>
+#include <game_structs.h>
 
 #define BIRD_SIZE 5
 #define BODY_SIZE 10
 
-gn_ph_settings_t settings;
+pe_settings_t settings;
 
 #define BIRD_ID 0
-#define BODY_ID 1
+#define WALL_ID 1
 
-#define BIRD go[BIRD_ID]
-#define BODY go[BODY_ID]
+#define BIRD objects[BIRD_ID]
+#define WALL objects[WALL_ID]
 
-static gn_game_object go[2];
+pe_game_object *objects[PHYS_ENGINE_OBJECT_BUFFER_CAPACITY];
 
+static pe_game_object bird, wall;
 static fb_uint8_t on_deleted_called;
 
-static void on_collision(gn_game_object *go1, gn_game_object *go2);
+
+static void on_collision(pe_game_object *go1, pe_game_object *go2);
 static void init_field(void);
 
 void test_no_collision(){
 
     init_field();
 
-    BIRD.point.x = 10;
-    BIRD.point.y = 10;
+    BIRD->point.x = 10;
+    BIRD->point.y = 10;
 
-    BODY.point.x = 50;
-    BODY.point.y = 50;
+    WALL->point.x = 50;
+    WALL->point.y = 50;
 
-    gn_phys_process_collision();
+    phys_engine_process_collision();
 
     TEST_ASSERT_EQUAL(on_deleted_called, 0);
 }
@@ -42,41 +45,41 @@ void test_collision(void){
 
     init_field();
 
-    BIRD.point.x = 10;
-    BIRD.point.y = 10;
+    BIRD->point.x = 10;
+    BIRD->point.y = 10;
 
-    BODY.point.x = 10.5f;
-    BODY.point.y = 11;
+    WALL->point.x = 10.5f;
+    WALL->point.y = 11;
 
-    gn_phys_process_collision();
+    phys_engine_process_collision();
 
     TEST_ASSERT_EQUAL(on_deleted_called, 1);
 }
 
-static void on_collision(gn_game_object *go1, gn_game_object *go2){
+static void on_collision(pe_game_object *go1, pe_game_object *go2){
 
     on_deleted_called = 1;
-
-    TEST_ASSERT_EQUAL(&BIRD, go1);
-    TEST_ASSERT_EQUAL(&BODY, go2);
 }
 
 static void init_field(){
+    
+    int i;
+    for(i = 0; i < PHYS_ENGINE_OBJECT_BUFFER_CAPACITY; i++){
 
-    gn_phys_reset_field();
+        objects[i] = FB_NULL;
+    }
 
     on_deleted_called = 0;
+    BIRD = &bird;
+    WALL = &wall;
 
     settings.on_collision = on_collision;
 
-    BIRD.width = BIRD_SIZE;
-    BIRD.height = BIRD_SIZE;
+    BIRD->width = BIRD_SIZE;
+    BIRD->height = BIRD_SIZE;
 
-    BODY.width = BODY_SIZE;
-    BODY.height = BODY_SIZE;
-
-    gn_phys_add_bird_to_field(&BIRD);
-    gn_phys_add_body_to_field(&BODY);
+    WALL->width = BODY_SIZE;
+    WALL->height = BODY_SIZE;
 }
 
 int main(void)
