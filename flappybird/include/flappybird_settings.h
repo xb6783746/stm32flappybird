@@ -7,7 +7,7 @@
 
 #define GO_FACTORY_CREATE_EVERY_S 3
 
-#define BIRD_COUNT 1
+#define BIRD_COUNT 2
 #define BIRD_WIDTH 5
 #define BIRD_HEIGHT 5
 #define BIRD_HORIZONTAL_VELOCITY -50

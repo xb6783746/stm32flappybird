@@ -19,17 +19,23 @@ static gboolean button_press_event_cb(GtkWidget *widget,
                       GdkEventButton *event,
                       gpointer data) {
 
+    if(!fb_game_is_running()) {
 
-    if (event->button == GDK_BUTTON_PRIMARY) {
-
-        if(fb_game_is_running()) {
-
-            fb_bird_jump(0);
-        } else {
-
-            fb_game_start();
-        }
+        fb_game_start();
+        return TRUE;
     }
+
+    int bird_num = 0;
+    switch (event->button){
+
+        case GDK_BUTTON_PRIMARY:
+            bird_num = 0;
+            break;
+        case GDK_BUTTON_SECONDARY:
+            bird_num = 1;
+    }
+
+    fb_bird_jump(bird_num);
 
     /* We've handled the event, stop processing */
     return TRUE;

@@ -46,6 +46,8 @@ void fb_game_start(){
 
     phys_engine_reset();
 
+    gr_init();
+
     init_field();
 
     timer_start();
@@ -68,10 +70,12 @@ fb_bool_t fb_game_is_running(){
 
 static void init_field(){
 
-    int i;
+    fb_uint8_t i;
     for(i = 0; i < BIRD_COUNT; i++){
 
         flappybird_object_t *bird = fb_object_buffer_get_object(Bird);
+
+        bird->bird.bird_number = i;
 
         bird->go.width = BIRD_WIDTH;
         bird->go.height = BIRD_HEIGHT;

@@ -6,7 +6,11 @@
 #include <systimer.h>
 #include <flappybird_events.h>
 
-extern fb_uint8_t button_flag;
+#define PRIMARY_BUTTON_BIRD_NUM 0
+#define SECONDARY_BUTTON_BIRD_NUM 1
+
+extern fb_uint8_t primary_button_flag;
+extern fb_uint8_t secondary_button_flag;
 
 static void game_init();
 static void on_game_over(fb_uint8_t bird_num);
@@ -32,11 +36,18 @@ int main(void)
 
         stm32f4_timer_next();
 
-        if(button_flag){
+        if(primary_button_flag){
 
-            button_flag = 0;
+            primary_button_flag = 0;
 
-            fb_bird_jump(0);
+            fb_bird_jump(PRIMARY_BUTTON_BIRD_NUM);
+        }
+
+        if(secondary_button_flag){
+
+            secondary_button_flag = 0;
+
+            fb_bird_jump(SECONDARY_BUTTON_BIRD_NUM);
         }
     }
 
@@ -106,19 +117,20 @@ static void init_button(){
     GPIO_InitTypeDef port;
 
     port.GPIO_Mode = GPIO_Mode_IN;
-    port.GPIO_Pin = GPIO_Pin_0;
+    port.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_3;
     port.GPIO_Speed = GPIO_Speed_50MHz;
     port.GPIO_OType = GPIO_OType_PP;
-    port.GPIO_PuPd = GPIO_PuPd_NOPULL;
+    port.GPIO_PuPd = GPIO_PuPd_UP;
     GPIO_Init(GPIOA, &port);
 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
 
     SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA, EXTI_PinSource0);
+    SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA, EXTI_PinSource3);
 
     EXTI_InitTypeDef EXTI_InitStruct;
 
-    EXTI_InitStruct.EXTI_Line = EXTI_Line0;
+    EXTI_InitStruct.EXTI_Line = EXTI_Line0 | EXTI_Line3;
     EXTI_InitStruct.EXTI_LineCmd = ENABLE;
     EXTI_InitStruct.EXTI_Mode = EXTI_Mode_Interrupt;
     EXTI_InitStruct.EXTI_Trigger = EXTI_Trigger_Rising;
@@ -129,7 +141,9 @@ static void init_button(){
     NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0F;
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0F;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
 
+    NVIC_InitStructure.NVIC_IRQChannel = EXTI3_IRQn;
     NVIC_Init(&NVIC_InitStructure);
 }
 

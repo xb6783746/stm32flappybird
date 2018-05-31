@@ -2,7 +2,8 @@
 
 add_executable(flappybird_exe
         src/main.c
-        src/button_handler.c
+        src/primary_button_handler.c
+        src/secondary_button_handler.c
         src/systimer.c
         src/system_stm32f4xx.c
         src/startup_stm32f407xx.S)
